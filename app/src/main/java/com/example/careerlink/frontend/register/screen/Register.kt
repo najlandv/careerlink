@@ -22,6 +22,7 @@ import com.example.careerlink.frontend.register.component.StyledButtonRegister
 
 @Composable
 fun RegisterScreen(modifier: Modifier = Modifier) {
+    var fullName by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -46,7 +47,15 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Correcting the usage of it in the lambda
+        // Field for Full Name
+        CustomOutlinedTextRegister(
+            value = fullName,
+            onValueChange = { value -> fullName = value },
+            label = "Nama Lengkap",
+            placeholder = "Masukkan nama lengkap"
+        )
+
+        // Field for Username
         CustomOutlinedTextRegister(
             value = username,
             onValueChange = { value -> username = value },
@@ -54,6 +63,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             placeholder = "Masukkan nama pengguna"
         )
 
+        // Field for Email
         CustomOutlinedTextRegister(
             value = email,
             onValueChange = { value ->
@@ -67,6 +77,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             Text("Masukkan email yang valid", color = Color.Red, fontSize = 12.sp)
         }
 
+        // Field for Password
         CustomOutlinedTextRegister(
             value = password,
             onValueChange = { value -> password = value },
@@ -74,6 +85,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
             placeholder = "Masukkan password"
         )
 
+        // Field for Confirm Password
         CustomOutlinedTextRegister(
             value = confirmPassword,
             onValueChange = { value ->
