@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
-import com.example.careerlink.frontend.component.ButtonAction
 import com.example.careerlink.frontend.component.CardAction
 import com.example.careerlink.frontend.component.MenuMyPost
 import com.example.careerlink.frontend.component.TopBar
@@ -42,6 +41,16 @@ fun ListPostMagangSayaScreen(
                     title = "UI/UX Designer Intern",
                     description = "Magang desain antarmuka pengguna di studio desain.",
                     date = "2023-11-10"
+                ),
+                MagangData(
+                    title = "UI/UX Designer Intern",
+                    description = "Magang desain antarmuka pengguna di studio desain.",
+                    date = "2023-11-10"
+                ),
+                MagangData(
+                    title = "UI/UX Designer Intern",
+                    description = "Magang desain antarmuka pengguna di studio desain.",
+                    date = "2023-11-10"
                 )
             )
         )
@@ -67,6 +76,7 @@ fun ListPostMagangSayaScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Scrollable List Section
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
