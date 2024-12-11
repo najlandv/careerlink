@@ -68,7 +68,9 @@ fun CardPopUp(modifier: Modifier = Modifier, onConfirm: () -> Unit, onCancel: ()
                 modifier = Modifier.fillMaxWidth()
             ) {
                 ButtonAction(
-                    onClick={},
+                    onClick={
+                        onConfirm()
+                    },
                     text = "Hapus",
                     backgroundColor = colorResource(id = R.color.button_blue),
                     textColor = colorResource(id = R.color.white),
@@ -78,7 +80,9 @@ fun CardPopUp(modifier: Modifier = Modifier, onConfirm: () -> Unit, onCancel: ()
                 Spacer(modifier = Modifier.width(8.dp))
 
                 OutlinedButton(
-                    onClick = { },
+                    onClick = {
+                        onCancel()
+                    },
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = colorResource(R.color.button_blue)
                     ),

@@ -7,12 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.careerlink.R
 
 
 
 @Composable
-fun MenuMyPost(menuActive: String = "Magang", modifier: Modifier = Modifier) {
+fun MenuMyPost(menuActive: String = "Magang", navController: NavController) {
     var activeMenu = menuActive// Menyimpan menu yang aktif
 
     Row(
@@ -35,7 +36,10 @@ fun MenuMyPost(menuActive: String = "Magang", modifier: Modifier = Modifier) {
             text = "Loker",
             backgroundColor = if (activeMenu == "Loker") colorResource(R.color.button_yellow_selected) else colorResource(R.color.button_yellow),
             textColor = if (activeMenu == "Loker") colorResource(R.color.black) else colorResource(R.color.white),
-            onClick = { activeMenu = "Loker" }
+            onClick = {
+                activeMenu = "Loker"
+                navController.navigate("list-loker-my-post")
+            }
         )
     }
 }
@@ -44,5 +48,5 @@ fun MenuMyPost(menuActive: String = "Magang", modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun MenuMyPostPrev() {
-    MenuMyPost()
+//    MenuMyPost()
 }

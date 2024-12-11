@@ -56,7 +56,7 @@ fun CardAction(
                         imageVector = Icons.Default.Edit,
                         contentDescription = "Edit",
                         tint = Color.Blue,
-                        modifier = Modifier.clickable {  }
+                        modifier = Modifier.clickable { onEdit() }
                     )
                     Icon(
                         imageVector = Icons.Default.Delete,
