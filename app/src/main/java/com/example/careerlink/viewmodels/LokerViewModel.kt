@@ -176,9 +176,9 @@ class LokerViewModel @Inject constructor(
                 try {
                     val response = lokerApiService.getLokerById("Bearer $token", lokerId)
                     if (response.isSuccessful) {
-                        val lokerData = response.body()
-                        if (lokerData != null) {
-                            _lokerDetail.value = lokerData
+                        val lokerResponse = response.body()
+                        if (lokerResponse?.data != null) {
+                            _lokerDetail.value = lokerResponse.data
                         } else {
                             _errorMessage.value = "Data loker tidak ditemukan."
                         }
@@ -194,6 +194,75 @@ class LokerViewModel @Inject constructor(
             }
         }
     }
+
+        fun updateLoker(
+            context: Context,
+            id: Int, // ID diperlukan untuk update
+            perusahaan: String,
+            judulLoker: String,
+            alamat: String,
+            posisiLoker: String,
+            kualifikasi: String,
+            jenisLoker: String,
+            deskripsiLoker: String,
+            kontak: String,
+            imageUri: Uri? = null,
+            onSuccess: () -> Unit,
+            onError: (String) -> Unit
+        ) {
+            viewModelScope.launch {
+                val token = tokenDataStore.accessToken.firstOrNull()
+                if (!token.isNullOrEmpty()) {
+                    try {
+                        val perusahaanBody = perusahaan.toRequestBody()
+                        val judulLokerBody = judulLoker.toRequestBody()
+                        val alamatBody = alamat.toRequestBody()
+                        val posisiLokerBody = posisiLoker.toRequestBody()
+                        val kualifikasiBody = kualifikasi.toRequestBody()
+                        val jenisLokerBody = jenisLoker.toRequestBody()
+                        val deskripsiLokerBody = deskripsiLoker.toRequestBody()
+                        val kontakBody = kontak.toRequestBody()
+
+                        val imagePart = imageUri?.let {
+                            val contentResolver = context.contentResolver
+                            val type = contentResolver.getType(it) ?: "image/*"
+                            val inputStream = contentResolver.openInputStream(it)
+                            val bytes = inputStream?.readBytes() ?: byteArrayOf()
+                            inputStream?.close()
+
+                            val requestBody = RequestBody.create(type.toMediaTypeOrNull(), bytes)
+                            MultipartBody.Part.createFormData("gambar_loker", "image.jpg", requestBody)
+                        }
+
+                        val response = lokerApiService.updateLoker(
+                            token = "Bearer $token",
+                            id = id,
+                            perusahaan = perusahaanBody,
+                            judulLoker = judulLokerBody,
+                            alamat = alamatBody,
+                            posisiLoker = posisiLokerBody,
+                            kualifikasi = kualifikasiBody,
+                            jenisLoker = jenisLokerBody,
+                            deskripsiLoker = deskripsiLokerBody,
+                            kontak = kontakBody,
+                            image = imagePart
+                        )
+
+                        if (response.isSuccessful) {
+                            onSuccess()
+                        } else {
+                            onError("Gagal memperbarui data: ${response.message()}")
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        onError("Terjadi kesalahan: ${e.message}")
+                    }
+                } else {
+                    onError("Token tidak ditemukan.")
+                }
+            }
+        }
+
 
 
 }

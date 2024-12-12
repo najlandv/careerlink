@@ -17,14 +17,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://n6j4w26m-3000.asse.devtunnels.ms/\"")
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
+        release {isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"

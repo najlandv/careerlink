@@ -1,6 +1,9 @@
 package com.example.careerlink.frontend.loker
 
+import android.content.Context
 import android.net.Uri
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -33,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -42,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.BottomBar
@@ -49,8 +54,15 @@ import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.LokerViewModel
 
 @Composable
-fun EditLokerScreen(modifier: Modifier = Modifier, lokerId: Int, viewModel: LokerViewModel = hiltViewModel()) {
+fun EditLokerScreen(
+    modifier: Modifier = Modifier,
+    lokerId: Int,
+    viewModel: LokerViewModel = hiltViewModel(),
+    context: Context = LocalContext.current,
+    navController: NavController
+) {
     val loker by viewModel.lokerDetail.collectAsState()
+    val baseUrl = "https://n6j4w26m-3000.asse.devtunnels.ms/"
 
     var perusahaan by remember { mutableStateOf("") }
     var judulLoker by remember { mutableStateOf("") }
@@ -257,8 +269,7 @@ fun EditLokerScreen(modifier: Modifier = Modifier, lokerId: Int, viewModel: Loke
                             placeholder = { Text("Alamat") },
                             modifier = modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 4.dp)
-                                .height(120.dp),
+                                .padding(vertical = 4.dp),
                             colors = OutlinedTextFieldDefaults.colors(
                                 focusedBorderColor = Color(0xFFFFC107),
                                 unfocusedBorderColor = Color(0xFFFFC107)
@@ -294,12 +305,14 @@ fun EditLokerScreen(modifier: Modifier = Modifier, lokerId: Int, viewModel: Loke
                                     modifier = Modifier.fillMaxSize()
                                 )
                             } else if (!loker?.gambar_loker.isNullOrEmpty()) {
+                                val imageUrl = baseUrl + loker!!.gambar_loker
                                 // Jika belum ada gambar yang dipilih, tampilkan gambar dari API
                                 Image(
-                                    painter = rememberAsyncImagePainter(model = loker!!.gambar_loker),
+                                    painter = rememberAsyncImagePainter(model = imageUrl),
                                     contentDescription = "Image from API",
                                     modifier = Modifier.fillMaxSize()
                                 )
+                                Log.d("EditLokerScreen", "URL Gambar: ${loker?.gambar_loker}")
                             } else {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     Icon(
@@ -319,7 +332,28 @@ fun EditLokerScreen(modifier: Modifier = Modifier, lokerId: Int, viewModel: Loke
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(
-                            onClick = { },
+                            onClick = {
+                                viewModel.updateLoker(
+                                    context = context,
+                                    id = lokerId,
+                                    perusahaan = perusahaan,
+                                    judulLoker = judulLoker,
+                                    alamat = alamat,
+                                    posisiLoker = posisiLoker,
+                                    kualifikasi = kualifikasi,
+                                    jenisLoker = jenisLoker,
+                                    deskripsiLoker = deskripsiLoker,
+                                    kontak = kontak,
+                                    imageUri = imageUri,
+                                    onSuccess = {
+                                        Toast.makeText(context, "Loker berhasil dikirim", Toast.LENGTH_SHORT).show()
+                                        navController.navigate("list-loker-my-post")
+                                    },
+                                    onError = { errorMessage ->
+                                        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                                    }
+                                )
+                            },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(48.dp),
@@ -337,10 +371,4 @@ fun EditLokerScreen(modifier: Modifier = Modifier, lokerId: Int, viewModel: Loke
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun EditLowonganPrev() {
-//    EditLokerScreen()
 }
