@@ -1,60 +1,77 @@
 package com.example.careerlink.frontend.magang
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
-import com.example.careerlink.frontend.component.ButtonAction
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.careerlink.R
+import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.CardAction
 import com.example.careerlink.frontend.component.MenuMyPost
 import com.example.careerlink.frontend.component.TopBar
+import com.example.careerlink.viewmodels.MagangViewModel
 
-data class MagangData(
-    val title: String,
-    val description: String,
-    val date: String
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListPostMagangSayaScreen(
     modifier: Modifier = Modifier,
-    onEditMagang: (MagangData) -> Unit
+    viewModel: MagangViewModel = hiltViewModel(),
+    navController: NavController
 ) {
-    var magangList by remember {
-        mutableStateOf(
-            listOf(
-                MagangData(
-                    title = "Software Engineer Intern",
-                    description = "Magang pengembangan perangkat lunak di perusahaan teknologi.",
-                    date = "2024-01-15"
-                ),
-                MagangData(
-                    title = "Data Analyst Intern",
-                    description = "Magang analisis data di startup fintech.",
-                    date = "2023-12-01"
-                ),
-                MagangData(
-                    title = "UI/UX Designer Intern",
-                    description = "Magang desain antarmuka pengguna di studio desain.",
-                    date = "2023-11-10"
-                )
-            )
-        )
+    val myPostMagangList by viewModel.myPostMagangList.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchMyPostMagangList()
     }
 
     Scaffold(
         topBar = {
-            TopBar(
-                text = "Postingan Magang Saya",
-                onBackClick = { }
-            )
+            Column {
+                TopBar("Postingan Saya")
+                Spacer(modifier = Modifier.padding(vertical = 4.dp))
+                MenuMyPost("Magang", navController)
+            }
         },
-        content = { paddingValues ->
+        bottomBar = { BottomBar() },
+        floatingActionButton = { Button(modifier = Modifier,
+            onClick = {
+                navController.navigate("add-magang")
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(id = R.color.button_blue),
+                contentColor = colorResource(id = R.color.white)
+            ),
+            shape = RoundedCornerShape(24.dp),){ Icon(Icons.Default.Add,"add")}
+        }
+    ) { paddingValues ->
+        if (!errorMessage.isNullOrEmpty()) {
+            Text(
+                text = errorMessage!!,
+                modifier = Modifier.padding(paddingValues).padding(16.dp)
+            )
+        } else if (myPostMagangList.isEmpty()) {
+            Text(
+                text = "Tidak ada data magang tersedia.",
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(16.dp)
+            )
+        } else {
             Column(
                 modifier = modifier
                     .fillMaxSize()
@@ -63,34 +80,48 @@ fun ListPostMagangSayaScreen(
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
 
-                MenuMyPost()
-
-                Spacer(modifier = Modifier.height(16.dp))
-
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(magangList) { magang ->
+                    items(myPostMagangList) { magang ->
                         CardAction(
-                            title = magang.title,
+                            title = magang.judulMagang,
                             subtitle = "Deskripsi:",
-                            desk = magang.description,
-                            date = magang.date,
-                            onEdit = { onEditMagang(magang) },
+                            desk = magang.deskripsiMagang,
+                            date = magang.tanggalPosting,
+                            onEdit = {
+                                navController.navigate("edit-magang/${magang.idMagang}")
+                            },
                             onDeleteConfirmed = {
-                                magangList = magangList.toMutableList().also { it.remove(magang) }
+                                viewModel.deleteMagang(
+                                    id = magang.idMagang,
+                                    onSucces = {
+                                        Toast.makeText(
+                                            context,
+                                            "Magang berhasil dihapus",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    },
+                                    onError = { error ->
+                                        Toast.makeText(
+                                            context,
+                                            "Gagal menghapus magang: $error",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                )
                             }
                         )
                     }
                 }
             }
         }
-    )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ListPostMagangSayaScreenPrev() {
-    ListPostMagangSayaScreen(onEditMagang = {})
+//    ListPostMagangSayaScreen(onEditMagang = {})
 }
