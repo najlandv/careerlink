@@ -45,4 +45,10 @@ object AppModule {
         return retrofit.create(LokerApiService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideMagangApiService(retrofit: Retrofit): MagangApiService {
+        return retrofit.create(MagangApiService::class.java)
+    }
+
 }
