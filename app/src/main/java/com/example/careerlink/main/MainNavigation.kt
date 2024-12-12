@@ -38,10 +38,20 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         composable("add-loker") {
             TambahLokerScreen(navController = navController)
         }
+//        composable("edit-loker/{id}") { backStackEntry ->
+//            val lokerId = backStackEntry.arguments?.getInt("id")
+//            if (lokerId != null) {
+//                EditLokerScreen(lokerId = lokerId)
+//            }
+//        }
+
         composable("edit-loker/{id}") { backStackEntry ->
-            val lokerId = backStackEntry.arguments?.getInt("id")
+            val lokerId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
             if (lokerId != null) {
-                EditLokerScreen(lokerId = lokerId)
+                EditLokerScreen(lokerId = lokerId, navController = navController)
+            } else {
+                // Handle error, e.g., show a Toast or navigate back
+                println("Error: Invalid loker ID")
             }
         }
 
