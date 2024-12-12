@@ -8,42 +8,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
-
-data class InternshipData(
-    val title: String,
-    val description: String,
-    val date: String
-)
+import com.example.careerlink.viewmodels.MagangViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListMagangScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: MagangViewModel = hiltViewModel()
 ) {
-    val magangList = listOf(
-        InternshipData(
-            title = "GrowMentor",
-            description = "Pengembang Perangkat Lunak (Software Developer Intern)",
-            date = "2024-02-03"
-        ),
-        InternshipData(
-            title = "PT Telkom Indonesia",
-            description = "Pengembang Perangkat Lunak (Software Developer Intern)",
-            date = "2024-02-03"
-        ),
-        InternshipData(
-            title = "PT Angkasa Pura",
-            description = "Pengembang Perangkat Lunak (Software Developer Intern)",
-            date = "2024-02-03"
-        ),
-        InternshipData(
-            title = "PT Angkasa Pura",
-            description = "Pengembang Perangkat Lunak (Software Developer Intern)",
-            date = "2024-02-03"
-        ),
-    )
+
+    val magangList by viewModel.magangList.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
 
     Scaffold(
         topBar = {
@@ -59,17 +39,31 @@ fun ListMagangScreen(
                     .padding(paddingValues)
                     .padding(horizontal = 16.dp)
             ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    items(magangList) { magang ->
-                        CardList(
-                            title = magang.title,
-                            subtitle = "Posisi Magang:",
-                            desk = magang.description,
-                            date = magang.date
-                        )
+                if (!errorMessage.isNullOrEmpty()) {
+                    Text(
+                        text = errorMessage!!,
+                        modifier = Modifier.padding(paddingValues).padding(16.dp)
+                    )
+                } else if (magangList.isEmpty()) {
+                    Text(
+                        text = "Tidak ada data Magang tersedia.",
+                        modifier = Modifier
+                            .padding(paddingValues)
+                            .padding(16.dp)
+                    )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        items(magangList) { magang ->
+                            CardList(
+                                title = magang.judulMagang,
+                                subtitle = "${magang.perusahaan} - ${magang.alamat}",
+                                desk = magang.deskripsiMagang,
+                                date = magang.tanggalPosting
+                            )
+                        }
                     }
                 }
             }

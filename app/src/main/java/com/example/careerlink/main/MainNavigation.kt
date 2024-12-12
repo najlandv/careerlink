@@ -12,6 +12,10 @@ import com.example.careerlink.frontend.loker.EditLokerScreen
 import com.example.careerlink.frontend.loker.ListLokerScreen
 import com.example.careerlink.frontend.loker.ListLowonganMyPostScreen
 import com.example.careerlink.frontend.loker.TambahLokerScreen
+import com.example.careerlink.frontend.magang.EditMagangScreen
+import com.example.careerlink.frontend.magang.ListMagangScreen
+import com.example.careerlink.frontend.magang.ListPostMagangSayaScreen
+import com.example.careerlink.frontend.magang.TambahMagangScreen
 import com.example.careerlink.frontend.register.screen.RegisterScreen
 
 @Composable
@@ -21,14 +25,17 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
 
     NavHost(
         navController = navController,
-        startDestination = if (token.isNullOrBlank()) "login" else "list-loker-my-post"
+        startDestination = if (token.isNullOrBlank()) "login" else "list-magang-my-post"
     ) {
+//        Authentication
         composable("login") {
             LoginScreen(navController = navController)
         }
         composable("register") {
             RegisterScreen(navController = navController)
         }
+
+//        Loker
         composable("list-loker") {
             ListLokerScreen()
         }
@@ -38,13 +45,6 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         composable("add-loker") {
             TambahLokerScreen(navController = navController)
         }
-//        composable("edit-loker/{id}") { backStackEntry ->
-//            val lokerId = backStackEntry.arguments?.getInt("id")
-//            if (lokerId != null) {
-//                EditLokerScreen(lokerId = lokerId)
-//            }
-//        }
-
         composable("edit-loker/{id}") { backStackEntry ->
             val lokerId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
             if (lokerId != null) {
@@ -55,8 +55,25 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
             }
         }
 
-//        composable("list-magang-my-post") {
-//            ListPostMagangSayaScreen()
-//        }
+//        Magang
+        composable("list-magang") {
+            ListMagangScreen()
+        }
+        composable("list-magang-my-post") {
+            ListPostMagangSayaScreen(navController = navController)
+        }
+        composable("add-magang") {
+            TambahMagangScreen(navController = navController)
+        }
+        composable("edit-magang/{id}") { backStackEntry ->
+            val magangId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (magangId != null) {
+                EditMagangScreen(magangId = magangId, navController = navController)
+            } else {
+                println("Error: Invalid loker ID")
+            }
+        }
+
+
     }
 }
