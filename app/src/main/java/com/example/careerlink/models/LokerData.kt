@@ -1,7 +1,9 @@
 package com.example.careerlink.models
 
+import com.google.gson.annotations.SerializedName
+
 data class LokerData(
-    val id_loker: Int,
+    @SerializedName("id_loker") val id_loker: Int,
     val tanggal_posting: String,
     val perusahaan: String,
     val judul_loker: String,

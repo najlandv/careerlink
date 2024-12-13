@@ -11,11 +11,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideBaseUrl(): String {
+        return "https://n6j4w26m-3000.asse.devtunnels.ms/"
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(baseUrl: String): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://n6j4w26m-3000.asse.devtunnels.ms/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -36,6 +43,12 @@ object AppModule {
     @Singleton
     fun provideLokerApiService(retrofit: Retrofit): LokerApiService {
         return retrofit.create(LokerApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMagangApiService(retrofit: Retrofit): MagangApiService {
+        return retrofit.create(MagangApiService::class.java)
     }
 
 }

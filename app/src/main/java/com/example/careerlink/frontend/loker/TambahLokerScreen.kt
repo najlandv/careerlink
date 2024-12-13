@@ -322,7 +322,7 @@ fun TambahLokerScreen(
                                 imageUri = imageUri,
                                 onSuccess = {
                                     Toast.makeText(context, "Loker berhasil dikirim", Toast.LENGTH_SHORT).show()
-                                    navController.navigate("list-loker")
+                                    navController.navigate("list-loker-my-post")
                                 },
                                 onError = { errorMessage ->
                                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()

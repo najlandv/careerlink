@@ -91,6 +91,7 @@ fun ListLowonganMyPostScreen(viewModel: LokerViewModel = hiltViewModel(), navCon
                         date = loker.tanggal_posting,
                         onEdit = {
                             navController.navigate("edit-loker/${loker.id_loker}")
+                            println("Edit id: " + loker.id_loker)
                         },
                         onDeleteConfirmed = {
                             println("onDeleteConfirmed terpanggil")
