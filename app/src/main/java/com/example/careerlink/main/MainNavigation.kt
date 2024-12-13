@@ -1,5 +1,8 @@
 package com.example.careerlink.main
 
+import EditSertifikasiScreen
+import ListMyPostSertifikasiScreen
+import TambahSertifikasiScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,6 +20,7 @@ import com.example.careerlink.frontend.magang.ListMagangScreen
 import com.example.careerlink.frontend.magang.ListPostMagangSayaScreen
 import com.example.careerlink.frontend.magang.TambahMagangScreen
 import com.example.careerlink.frontend.register.screen.RegisterScreen
+import com.example.careerlink.frontend.sertifikasi.ListSertifikasiScreen
 
 @Composable
 fun MainNavigation(tokenDataStore: TokenDataStore) {
@@ -74,6 +78,24 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
             }
         }
 
-
+//        Sertifikasi
+        composable("list-sertifikasi") {
+            ListSertifikasiScreen(navController = navController)
+        }
+        composable("list-sertifikasi-my-post") {
+            ListMyPostSertifikasiScreen(navController = navController)
+        }
+        composable("add-sertfikasi") {
+            TambahSertifikasiScreen(navController = navController)
+        }
+        composable("edit-sertifikasi/{id}") { backStackEntry ->
+            val sertifikasiId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (sertifikasiId != null) {
+//                EditMagangScreen(magangId = smagangId, navController = navController)
+                EditSertifikasiScreen(sertifikasiId = sertifikasiId, navController = navController)
+            } else {
+                println("Error: Invalid loker ID")
+            }
+        }
     }
 }

@@ -51,4 +51,10 @@ object AppModule {
         return retrofit.create(MagangApiService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideSertifikasiApiService(retrofit: Retrofit): SertifikasiApiService {
+        return retrofit.create(SertifikasiApiService::class.java)
+    }
+
 }
