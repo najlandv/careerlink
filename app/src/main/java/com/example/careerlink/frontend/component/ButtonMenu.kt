@@ -22,7 +22,7 @@ fun ButtonMenu(
    onClick: () -> Unit
 ) {
    Button(
-      onClick = {},
+      onClick = onClick,
       colors = ButtonDefaults.buttonColors(
          containerColor = backgroundColor,
          contentColor = textColor

@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,7 +18,7 @@ import com.example.careerlink.R
 
 @Composable
 fun MenuMyPost(menuActive: String = "Magang", navController: NavController) {
-    var activeMenu = menuActive// Menyimpan menu yang aktif
+    var activeMenu by rememberSaveable { mutableStateOf(menuActive) }// Menyimpan menu yang aktif
 
     Row(
         modifier = Modifier.fillMaxWidth(),
