@@ -8,48 +8,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
-
-data class CertificationData(
-    val title: String,
-    val description: String,
-    val date: String
-)
+import com.example.careerlink.viewmodels.SertifikasiViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListSertifikasiScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: SertifikasiViewModel = hiltViewModel(),
+    navController: NavController
 ) {
-    val sertifikasiList = listOf(
-        CertificationData(
-            title = "Certified Kotlin Developer",
-            description = "Sertifikasi penguasaan bahasa pemrograman Kotlin.",
-            date = "2024-02-03"
-        ),
-        CertificationData(
-            title = "Professional Android Developer",
-            description = "Sertifikasi pengembangan aplikasi Android.",
-            date = "2023-12-15"
-        ),
-        CertificationData(
-            title = "Cloud Computing Specialist",
-            description = "Sertifikasi layanan komputasi awan.",
-            date = "2023-11-20"
-        ),
-        CertificationData(
-            title = "Data Science Practitioner",
-            description = "Sertifikasi dasar-dasar ilmu data.",
-            date = "2023-10-10"
-        ),
-    )
+
+    val sertifikasiList by viewModel.sertifikasiList.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
 
     Scaffold(
         topBar = {
             TopBar(
                 text = "Sertifikasi",
-                onBackClick = { }
+                onBackClick = { navController.popBackStack() }
             )
         },
         content = { paddingValues ->
@@ -59,17 +41,31 @@ fun ListSertifikasiScreen(
                     .padding(paddingValues)
                     .padding(horizontal = 16.dp)
             ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    items(sertifikasiList) { sertifikasi ->
-                        CardList(
-                            title = sertifikasi.title,
-                            subtitle = "Deskripsi:",
-                            desk = sertifikasi.description,
-                            date = sertifikasi.date
-                        )
+                if (!errorMessage.isNullOrEmpty()) {
+                    Text(
+                        text = errorMessage!!,
+                        modifier = Modifier.padding(paddingValues).padding(16.dp)
+                    )
+                } else if (sertifikasiList.isEmpty()) {
+                    Text(
+                        text = "Tidak ada data Magang tersedia.",
+                        modifier = Modifier
+                            .padding(paddingValues)
+                            .padding(16.dp)
+                    )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        items(sertifikasiList) { sertifikasi ->
+                            CardList(
+                                title = sertifikasi.judulSertifikasi,
+                                subtitle = "Deskripsi:",
+                                desk = sertifikasi.deskripsi,
+                                date = sertifikasi.tanggalPosting
+                            )
+                        }
                     }
                 }
             }
@@ -80,5 +76,5 @@ fun ListSertifikasiScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ListSertifikasiScreenPrev() {
-    ListSertifikasiScreen()
+//    ListSertifikasiScreen()
 }
