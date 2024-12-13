@@ -24,13 +24,19 @@ fun MenuMyPost(menuActive: String = "Magang", navController: NavController) {
             text = "Magang",
             backgroundColor = if (activeMenu == "Magang") colorResource(R.color.button_yellow_selected) else colorResource(R.color.button_yellow),
             textColor = if (activeMenu == "Magang") colorResource(R.color.black) else colorResource(R.color.white),
-            onClick = { activeMenu = "Magang" }
+            onClick = {
+                activeMenu = "Magang"
+                navController.navigate("list-magang-my-post")
+            }
         )
         ButtonMenu(
             text = "Sertifikasi",
             backgroundColor = if (activeMenu == "Sertifikasi") colorResource(R.color.button_yellow_selected) else colorResource(R.color.button_yellow),
             textColor = if (activeMenu == "Sertifikasi") colorResource(R.color.black) else colorResource(R.color.white),
-            onClick = { activeMenu = "Sertifikasi" }
+            onClick = {
+                activeMenu = "Sertifikasi"
+                navController.navigate("list-sertifikasi-my-post")
+            }
         )
         ButtonMenu(
             text = "Loker",
