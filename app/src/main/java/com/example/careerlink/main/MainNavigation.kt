@@ -16,11 +16,14 @@ import com.example.careerlink.frontend.loker.EditLokerScreen
 import com.example.careerlink.frontend.loker.ListLokerScreen
 import com.example.careerlink.frontend.loker.ListLowonganMyPostScreen
 import com.example.careerlink.frontend.loker.TambahLokerScreen
+import com.example.careerlink.frontend.magang.DetailMagangScreen
 import com.example.careerlink.frontend.magang.EditMagangScreen
 import com.example.careerlink.frontend.magang.ListMagangScreen
 import com.example.careerlink.frontend.magang.ListPostMagangSayaScreen
 import com.example.careerlink.frontend.magang.TambahMagangScreen
 import com.example.careerlink.frontend.profile.ChangePasswordScreen
+import com.example.careerlink.frontend.profile.EditProfileScreen
+import com.example.careerlink.frontend.profile.ProfileScreen
 import com.example.careerlink.frontend.register.screen.RegisterScreen
 import com.example.careerlink.frontend.sertifikasi.DetailSertifikasiScreen
 import com.example.careerlink.frontend.sertifikasi.ListSertifikasiScreen
@@ -69,10 +72,18 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
 
 //        Magang
         composable("list-magang") {
-            ListMagangScreen()
+            ListMagangScreen(navController = navController)
         }
         composable("list-magang-my-post") {
             ListPostMagangSayaScreen(navController = navController)
+        }
+        composable("detail-magang/{id}") { backStackEntry ->
+            val magangId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (magangId != null) {
+                DetailMagangScreen (magangId = magangId, navController = navController)
+            } else {
+                println("Error: Invalid loker ID")
+            }
         }
         composable("add-magang") {
             TambahMagangScreen(navController = navController)
@@ -114,8 +125,15 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         }
 
 //        Profile
+        composable("profile") {
+            ProfileScreen(navController = navController)
+        }
         composable("change-password") {
             ChangePasswordScreen(navController = navController)
         }
+        composable("edit-profile") {
+            EditProfileScreen(navController = navController)
+        }
+
     }
 }

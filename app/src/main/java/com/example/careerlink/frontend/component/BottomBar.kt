@@ -43,7 +43,7 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController ) {
         BottomBarItem(
             iconRes = R.drawable.baseline_account_circle_24,
             label = "Profile",
-            onClick = {navController.navigate("")}
+            onClick = {navController.navigate("profile")}
         )
     }
 }

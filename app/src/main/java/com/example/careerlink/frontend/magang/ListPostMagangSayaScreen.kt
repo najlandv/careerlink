@@ -47,7 +47,7 @@ fun ListPostMagangSayaScreen(
                 MenuMyPost("Magang", navController)
             }
         },
-        bottomBar = { BottomBar() },
+        bottomBar = { BottomBar(navController = navController) },
         floatingActionButton = { Button(modifier = Modifier,
             onClick = {
                 navController.navigate("add-magang")
