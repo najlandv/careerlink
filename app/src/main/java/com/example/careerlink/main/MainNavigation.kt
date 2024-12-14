@@ -20,6 +20,7 @@ import com.example.careerlink.frontend.magang.EditMagangScreen
 import com.example.careerlink.frontend.magang.ListMagangScreen
 import com.example.careerlink.frontend.magang.ListPostMagangSayaScreen
 import com.example.careerlink.frontend.magang.TambahMagangScreen
+import com.example.careerlink.frontend.profile.ChangePasswordScreen
 import com.example.careerlink.frontend.register.screen.RegisterScreen
 import com.example.careerlink.frontend.sertifikasi.DetailSertifikasiScreen
 import com.example.careerlink.frontend.sertifikasi.ListSertifikasiScreen
@@ -106,11 +107,15 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         composable("edit-sertifikasi/{id}") { backStackEntry ->
             val sertifikasiId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
             if (sertifikasiId != null) {
-//                EditMagangScreen(magangId = smagangId, navController = navController)
                 EditSertifikasiScreen(sertifikasiId = sertifikasiId, navController = navController)
             } else {
                 println("Error: Invalid loker ID")
             }
+        }
+
+//        Profile
+        composable("change-password") {
+            ChangePasswordScreen(navController = navController)
         }
     }
 }
