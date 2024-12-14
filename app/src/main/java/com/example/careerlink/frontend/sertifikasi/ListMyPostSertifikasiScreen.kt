@@ -86,7 +86,9 @@ fun ListMyPostSertifikasiScreen(
                         subtitle = "Deskripsi:",
                         desk = sertifikasi.deskripsi,
                         date = sertifikasi.tanggalPosting,
-                        onEdit = { },
+                        onEdit = {
+                            navController.navigate("edit-sertifikasi/${sertifikasi.idSertifikasi}")
+                        },
                         onDeleteConfirmed = {
                             viewModel.deleteSertifikasi(
                                 id = sertifikasi.idSertifikasi,
