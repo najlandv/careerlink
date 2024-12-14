@@ -76,16 +76,28 @@ fun HomeScreen(
                     Row(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        FeatureCard("Loker", R.drawable.baseline_account_circle_24)
+                        FeatureCard(
+                            "Loker",
+                            R.drawable.baseline_account_circle_24,
+                            onClick = {navController.navigate("list-loker")}
+                        )
                         Spacer(modifier = Modifier.width(16.dp))
-                        FeatureCard("Magang", R.drawable.baseline_post_add_24)
+                        FeatureCard(
+                            "Magang",
+                            R.drawable.baseline_post_add_24,
+                            onClick = {navController.navigate("list-magang")}
+                        )
 
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        FeatureCard("Sertifikasi", R.drawable.baseline_verified_24)
+                        FeatureCard(
+                            "Sertifikasi",
+                            R.drawable.baseline_verified_24,
+                            onClick = {navController.navigate("list-sertifikasi")}
+                        )
                     }
                 }
             }
@@ -94,13 +106,14 @@ fun HomeScreen(
 }
 
 @Composable
-fun FeatureCard(title: String, iconRes: Int) {
+fun FeatureCard(title: String, iconRes: Int, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .width(160.dp)
             .height(160.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.button_yellow))
+        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.button_yellow)),
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier
