@@ -37,7 +37,7 @@ fun HomeScreen(
 
     Scaffold(
         topBar = { MainTopBar() },
-        bottomBar = { BottomBar() }
+        bottomBar = { BottomBar(navController = navController) }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier

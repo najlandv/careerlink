@@ -47,7 +47,7 @@ fun ListMyPostSertifikasiScreen(
             Spacer(modifier = Modifier.padding(vertical = 4.dp))
             MenuMyPost("Sertifikasi", navController)
         },
-        bottomBar = { BottomBar() },
+        bottomBar = { BottomBar(navController = navController) },
         floatingActionButton = { Button(modifier = Modifier,
             onClick = {
                 navController.navigate("add-magang")

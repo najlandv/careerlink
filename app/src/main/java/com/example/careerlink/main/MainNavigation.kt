@@ -21,6 +21,7 @@ import com.example.careerlink.frontend.magang.ListMagangScreen
 import com.example.careerlink.frontend.magang.ListPostMagangSayaScreen
 import com.example.careerlink.frontend.magang.TambahMagangScreen
 import com.example.careerlink.frontend.register.screen.RegisterScreen
+import com.example.careerlink.frontend.sertifikasi.DetailSertifikasiScreen
 import com.example.careerlink.frontend.sertifikasi.ListSertifikasiScreen
 
 @Composable
@@ -90,6 +91,14 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         }
         composable("list-sertifikasi-my-post") {
             ListMyPostSertifikasiScreen(navController = navController)
+        }
+        composable("detail-sertifikasi/{id}") { backStackEntry ->
+            val sertifikasiId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (sertifikasiId != null) {
+                DetailSertifikasiScreen(sertifikasiId = sertifikasiId, navController = navController)
+            } else {
+                println("Error: Invalid loker ID")
+            }
         }
         composable("add-sertfikasi") {
             TambahSertifikasiScreen(navController = navController)
