@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.careerlink.data.TokenDataStore
+import com.example.careerlink.frontend.home.HomeScreen
 import com.example.careerlink.frontend.login.screen.LoginScreen
 import com.example.careerlink.frontend.loker.EditLokerScreen
 import com.example.careerlink.frontend.loker.ListLokerScreen
@@ -29,7 +30,7 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
 
     NavHost(
         navController = navController,
-        startDestination = if (token.isNullOrBlank()) "login" else "list-magang-my-post"
+        startDestination = if (token.isNullOrBlank()) "login" else "home"
     ) {
 //        Authentication
         composable("login") {
@@ -37,6 +38,11 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         }
         composable("register") {
             RegisterScreen(navController = navController)
+        }
+
+//        Home
+        composable("home") {
+            HomeScreen(navController = navController)
         }
 
 //        Loker
