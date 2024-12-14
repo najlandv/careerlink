@@ -63,7 +63,8 @@ fun ListSertifikasiScreen(
                                 title = sertifikasi.judulSertifikasi,
                                 subtitle = "Deskripsi:",
                                 desk = sertifikasi.deskripsi,
-                                date = sertifikasi.tanggalPosting
+                                date = sertifikasi.tanggalPosting,
+                                onClick = {navController.navigate("detail-sertifikasi/${sertifikasi.idSertifikasi}")}
                             )
                         }
                     }

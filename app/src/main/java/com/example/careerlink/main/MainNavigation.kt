@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.careerlink.data.TokenDataStore
+import com.example.careerlink.frontend.home.HomeScreen
 import com.example.careerlink.frontend.login.screen.LoginScreen
 import com.example.careerlink.frontend.loker.EditLokerScreen
 import com.example.careerlink.frontend.loker.ListLokerScreen
@@ -20,6 +21,7 @@ import com.example.careerlink.frontend.magang.ListMagangScreen
 import com.example.careerlink.frontend.magang.ListPostMagangSayaScreen
 import com.example.careerlink.frontend.magang.TambahMagangScreen
 import com.example.careerlink.frontend.register.screen.RegisterScreen
+import com.example.careerlink.frontend.sertifikasi.DetailSertifikasiScreen
 import com.example.careerlink.frontend.sertifikasi.ListSertifikasiScreen
 
 @Composable
@@ -29,7 +31,7 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
 
     NavHost(
         navController = navController,
-        startDestination = if (token.isNullOrBlank()) "login" else "list-magang-my-post"
+        startDestination = if (token.isNullOrBlank()) "login" else "home"
     ) {
 //        Authentication
         composable("login") {
@@ -37,6 +39,11 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         }
         composable("register") {
             RegisterScreen(navController = navController)
+        }
+
+//        Home
+        composable("home") {
+            HomeScreen(navController = navController)
         }
 
 //        Loker
@@ -84,6 +91,14 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
         }
         composable("list-sertifikasi-my-post") {
             ListMyPostSertifikasiScreen(navController = navController)
+        }
+        composable("detail-sertifikasi/{id}") { backStackEntry ->
+            val sertifikasiId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (sertifikasiId != null) {
+                DetailSertifikasiScreen(sertifikasiId = sertifikasiId, navController = navController)
+            } else {
+                println("Error: Invalid loker ID")
+            }
         }
         composable("add-sertfikasi") {
             TambahSertifikasiScreen(navController = navController)

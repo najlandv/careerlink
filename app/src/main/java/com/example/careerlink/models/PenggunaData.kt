@@ -1,8 +1,20 @@
 package com.example.careerlink.models
 
+import com.google.gson.annotations.SerializedName
+
 data class PenggunaData(
-    val id_pengguna: Int,
-    val nama_lengkap: String,
+
+
+    @SerializedName("id_pengguna")
+    val idPengguna: Int,
+
+    @SerializedName("nama_lengkap")
+    val namaLengkap: String,
+
+    @SerializedName("email")
     val email: String,
-    val nama_pengguna: String
+
+    @SerializedName("nama_pengguna")
+    val namaPengguna: String
+
 )

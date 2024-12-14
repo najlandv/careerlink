@@ -1,5 +1,6 @@
 package com.example.careerlink.frontend.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,12 +20,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CardList(title: String="PT SEMEN PADANG", subtitle: String="Posisi Magang :", desk: String="Deksripsi Magang yang akan dilakukan selama prosesnya", date: String="12-12-1212") {
+fun CardList(
+    title: String="PT SEMEN PADANG",
+    subtitle: String="Posisi Magang :",
+    desk: String="Deksripsi Magang yang akan dilakukan selama prosesnya",
+    date: String="12-12-1212",
+    onClick: () -> Unit = { println("clicked")}
+) {
     Card(modifier = Modifier
-        .fillMaxWidth(),
+        .fillMaxWidth()
+        .clickable { onClick() },
         colors = CardDefaults.cardColors(Color(0xFFFFDE59)),
     ) {
-        Column(modifier = Modifier.padding(24.dp),
+        Column(
+            modifier = Modifier
+                .padding(24.dp),
             verticalArrangement = Arrangement.SpaceBetween) {
             Column {
                 Text(title,
@@ -63,5 +73,5 @@ fun CardList(title: String="PT SEMEN PADANG", subtitle: String="Posisi Magang :"
 @Preview(showBackground = true)
 @Composable
 private fun CardListPrev() {
-    CardList()
+//    CardList()
 }
