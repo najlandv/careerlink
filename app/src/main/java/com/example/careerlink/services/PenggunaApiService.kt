@@ -1,6 +1,7 @@
 package com.example.careerlink.services
 
 import com.example.careerlink.models.ChangePasswordRequest
+import com.example.careerlink.models.PenggunaEditRequest
 import com.example.careerlink.models.PenggunaResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -19,5 +20,11 @@ interface PenggunaApiService{
     suspend fun changePassword(
         @Header("Authorization") token: String,
         @Body request: ChangePasswordRequest
+    ) : Response<Unit>
+
+    @PATCH("api/profile")
+    suspend fun updateProfile(
+        @Header("Authorization") token: String,
+        @Body request: PenggunaEditRequest
     ) : Response<Unit>
 }

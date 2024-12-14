@@ -11,6 +11,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.MagangViewModel
@@ -19,7 +21,8 @@ import com.example.careerlink.viewmodels.MagangViewModel
 @Composable
 fun ListMagangScreen(
     modifier: Modifier = Modifier,
-    viewModel: MagangViewModel = hiltViewModel()
+    viewModel: MagangViewModel = hiltViewModel(),
+    navController: NavController
 ) {
 
     val magangList by viewModel.magangList.collectAsState()
@@ -29,7 +32,7 @@ fun ListMagangScreen(
         topBar = {
             TopBar(
                 text = "Magang",
-                onBackClick = { }
+                onBackClick = { navController.popBackStack() }
             )
         },
         content = { paddingValues ->
@@ -61,7 +64,8 @@ fun ListMagangScreen(
                                 title = magang.judulMagang,
                                 subtitle = "${magang.perusahaan} - ${magang.alamat}",
                                 desk = magang.deskripsiMagang,
-                                date = magang.tanggalPosting
+                                date = magang.tanggalPosting,
+                                onClick = { navController.navigate("detail-magang/${magang.idMagang}") }
                             )
                         }
                     }
@@ -74,5 +78,6 @@ fun ListMagangScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ListMagangScreenPrev() {
-    ListMagangScreen()
+    val navController = rememberNavController()
+    ListMagangScreen(navController = navController)
 }

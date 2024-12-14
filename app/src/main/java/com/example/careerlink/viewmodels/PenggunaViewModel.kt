@@ -1,11 +1,11 @@
 package com.example.careerlink.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.careerlink.data.TokenDataStore
 import com.example.careerlink.models.ChangePasswordRequest
 import com.example.careerlink.models.PenggunaData
+import com.example.careerlink.models.PenggunaEditRequest
 import com.example.careerlink.services.PenggunaApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,8 +47,41 @@ class PenggunaViewModel @Inject constructor(
         }
     }
 
+    fun updatePengguna(
+        namaLengkap: String,
+        namaPengguna: String,
+        email: String,
+        onSucces: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val token = tokenDataStore.accessToken.firstOrNull()
+            if (!token.isNullOrEmpty()) {
+                try {
+                    val request = PenggunaEditRequest(
+                        namaLengkap = namaLengkap,
+                        namaPengguna = namaPengguna,
+                        email = email
+                    )
+
+                    val response = penggunaApiService.updateProfile("Bearer $token", request)
+                    if (response.isSuccessful) {
+                        onSucces()
+                    } else {
+                        onError("Gagal mengupdate profile: ${response.message()}")
+                    }
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    onError("Terjadi kesalahan: ${e.message}")
+                }
+            } else {
+                _errorMessage.value = "Token tidak ditemukan"
+            }
+        }
+    }
+
     fun changePassword(
-        context: Context,
         passwordLama: String,
         passwordBaru: String,
         konfirmasiPassword: String,
@@ -75,7 +108,7 @@ class PenggunaViewModel @Inject constructor(
                     // Panggil API
                     val response = penggunaApiService.changePassword("Bearer $token", request)
                     if (response.isSuccessful) {
-                        onSucces
+                        onSucces()
                     } else {
                         onError("Gagal mengupdate password: ${response.message()}")
                     }
