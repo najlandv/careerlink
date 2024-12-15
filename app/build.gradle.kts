@@ -17,7 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"https://n6j4w26m-3000.asse.devtunnels.ms/\"")
+        buildConfigField("String", "BASE_URL", "\"https://apicareerlink-production.up.railway.app/\"")
         vectorDrawables {
             useSupportLibrary = true
         }

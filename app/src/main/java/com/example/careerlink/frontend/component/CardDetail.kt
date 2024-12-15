@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -22,17 +20,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
 
 @Composable
-fun CardDetail(modifier: Modifier = Modifier) {
+fun CardDetail(
+    modifier: Modifier = Modifier,
+    penulis: String = "Penulis",
+    perusahaan: String = "Perusahaan",
+    posisi: String = "Posisi",
+    deskripsi: String = "Deskripsi",
+    gambar: String? = null
+) {
     Card(modifier = Modifier
         .fillMaxWidth(),
         colors = CardDefaults.cardColors(Color(0xFFFFDE59)),
@@ -44,7 +49,7 @@ fun CardDetail(modifier: Modifier = Modifier) {
                 Icon(Icons.Default.AccountCircle, "Proile", modifier = Modifier.size(48.dp))
                 Spacer(modifier =  Modifier.width(8.dp))
                 Column {
-                    Text("Najla Humaira",
+                    Text(penulis,
                         style = TextStyle(
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
@@ -55,7 +60,7 @@ fun CardDetail(modifier: Modifier = Modifier) {
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Text("PT SEJAHTERA MANDIRI",
+            Text(perusahaan,
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 24.sp,
@@ -68,29 +73,27 @@ fun CardDetail(modifier: Modifier = Modifier) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text("Posisi :")
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Ahli K3 (Keselamatan dan Kesehatan Kerja)")
+                        Text(posisi)
                         Spacer(modifier = Modifier.height(16.dp))
                         Text("Deskripsi Pekerjaan :")
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Seseorang yang bekerja di Bagian K3 bertugas menjamin dan melindungi keselamatan serta kesehatan tenaga kerja melalui berbagai upaya keamanan pekerja. Beberapa hal yang mungkin bisa dilakukan adalah pencegahan kecelakaan seperti kebakaran, cedera ataupun hal-hal lain yang mungkin bisa membahayakan.")
+                        Text(deskripsi)
                     }
                 }
             Spacer(modifier = Modifier.height(8.dp))
-            Image(painterResource(R.drawable.gambar_contoh),"Test", modifier = Modifier.size(250.dp))
-            Spacer(modifier = Modifier.height(12.dp))
-            Button(
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                colors = ButtonDefaults.buttonColors(colorResource(R.color.button_blue))
-            ) {
-                Text(
-                    text = "Review",
-                    fontSize = 16.sp,
-                    color = Color.White
+            if (gambar != "") {
+                Image(
+                    painterResource(R.drawable.gambar_contoh),
+                    "Test",
+                    modifier = Modifier.size(250.dp)
                 )
             }
+            Image(
+                rememberAsyncImagePainter(model = gambar),
+                "Test",
+                modifier = Modifier.size(250.dp)
+            )
+            Spacer(modifier = Modifier.height(12.dp))
         }
     }
 }

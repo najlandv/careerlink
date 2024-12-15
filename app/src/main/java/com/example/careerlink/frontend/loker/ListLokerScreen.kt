@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
@@ -22,7 +23,10 @@ import com.example.careerlink.viewmodels.LokerViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ListLokerScreen(viewModel: LokerViewModel = hiltViewModel()) {
+fun ListLokerScreen(
+    viewModel: LokerViewModel = hiltViewModel(),
+    navController: NavController
+) {
 
     val lokerList by viewModel.lokerList.collectAsState()
     val errorMessage by viewModel.errorMessage.collectAsState()
@@ -32,7 +36,7 @@ fun ListLokerScreen(viewModel: LokerViewModel = hiltViewModel()) {
             TopBar("Lowongan Kerja")
         },
         bottomBar = {
-            BottomBar()
+            BottomBar(navController = navController)
         }
     ) { paddingValues ->
         if (!errorMessage.isNullOrEmpty()) {
