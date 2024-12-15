@@ -56,6 +56,7 @@ fun DetailLokerScreen(
                 .padding(horizontal = 16.dp)
         ) {
             item {
+
                 CardDetail(
                     penulis = loker!!.Pengguna.namaLengkap,
                     perusahaan = loker!!.perusahaan,

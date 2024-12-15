@@ -39,7 +39,8 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
     ) {
 //        Authentication
         composable("login") {
-            LoginScreen(navController = navController)
+//            LoginScreen(navController = navController)
+            TambahMagangScreen(navController = navController)
         }
         composable("register") {
             RegisterScreen(navController = navController)

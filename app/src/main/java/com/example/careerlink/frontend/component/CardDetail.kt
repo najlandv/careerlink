@@ -1,6 +1,9 @@
 package com.example.careerlink.frontend.component
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Card
@@ -28,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
+import com.example.careerlink.services.LocationResult
 
 @Composable
 fun CardDetail(
@@ -78,6 +84,22 @@ fun CardDetail(
                         Text("Deskripsi Pekerjaan :")
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(deskripsi)
+                   
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text("Alamat :")
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Masjid Raya Syekh Ahmad Khatib Al-Minangkabawi Sumatera Barat",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp)
+                                .clickable {
+                                    // Redirect to Google Maps
+                                    val uri = Uri.parse("geo:${"-0.925832"},${"100.362787"}?q=${"Masjid Raya Syekh Ahmad Khatib Al-Minangkabawi Sumatera Barat"}")
+                                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                                    intent.setPackage("com.google.android.apps.maps")
+                                    context.startActivity(intent)
+                                })
                     }
                 }
             Spacer(modifier = Modifier.height(8.dp))
@@ -98,8 +120,8 @@ fun CardDetail(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun CardDetailPrev() {
-    CardDetail()
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun CardDetailPrev() {
+//    CardDetail()
+//}
