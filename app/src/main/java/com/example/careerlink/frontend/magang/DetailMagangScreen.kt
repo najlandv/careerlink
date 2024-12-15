@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,11 +19,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.careerlink.BuildConfig
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.MagangViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailMagangScreen(
     modifier: Modifier = Modifier,
@@ -34,7 +33,7 @@ fun DetailMagangScreen(
 ) {
 
     val magang by viewModel.magangDetail.collectAsState()
-    val baseUrl = "https://n6j4w26m-3000.asse.devtunnels.ms/"
+    val baseUrl = BuildConfig.BASE_URL
 
     LaunchedEffect(magangId) {
         viewModel.getMagangById(magangId)
