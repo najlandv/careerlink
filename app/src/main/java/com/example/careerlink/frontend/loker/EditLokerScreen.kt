@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.careerlink.BuildConfig
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.TopBar
@@ -62,7 +63,7 @@ fun EditLokerScreen(
     navController: NavController
 ) {
     val loker by viewModel.lokerDetail.collectAsState()
-    val baseUrl = "https://n6j4w26m-3000.asse.devtunnels.ms/"
+    val baseUrl = BuildConfig.BASE_URL
 
     var perusahaan by remember { mutableStateOf("") }
     var judulLoker by remember { mutableStateOf("") }
@@ -102,7 +103,7 @@ fun EditLokerScreen(
             TopBar("Edit Postingan Lowongan Kerja")
         },
         bottomBar = {
-            BottomBar()
+            BottomBar(navController = navController)
         }
     ) { paddingValues ->
         LazyColumn(

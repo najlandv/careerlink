@@ -1,5 +1,7 @@
 package com.example.careerlink.frontend.profile
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,26 +13,45 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.MainTopBar
+import com.example.careerlink.viewmodels.PenggunaViewModel
 
 @Composable
-fun EditProfileScreen(onSave: () -> Unit, onCancel: () -> Unit) {
+fun EditProfileScreen(
+    viewModel: PenggunaViewModel = hiltViewModel(),
+    navController: NavController,
+    context: Context = LocalContext.current
+) {
+    val pengguna by viewModel.pengguna.collectAsState()
 
-    val fullName = remember { mutableStateOf("Nadiva Najla") }
-    val username = remember { mutableStateOf("nadiva123") }
-    val email = remember { mutableStateOf("nadiva123@gmail.com") }
+    var namaLengkap by remember { mutableStateOf("") }
+    var namaPengguna by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+
+    LaunchedEffect(pengguna) {
+        namaLengkap = pengguna!!.namaLengkap
+        namaPengguna = pengguna!!.namaPengguna
+        email = pengguna!!.email
+    }
 
     Scaffold(
         topBar = { MainTopBar() }
@@ -56,24 +77,24 @@ fun EditProfileScreen(onSave: () -> Unit, onCancel: () -> Unit) {
 
             EditableField(
                 label = "Full Name",
-                value = fullName.value,
-                onValueChange = { fullName.value = it }
+                value = namaLengkap,
+                onValueChange = { namaLengkap = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             EditableField(
                 label = "Username",
-                value = username.value,
-                onValueChange = { username.value = it }
+                value = namaPengguna,
+                onValueChange = { namaPengguna = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             EditableField(
                 label = "Email",
-                value = email.value,
-                onValueChange = { email.value = it }
+                value = email,
+                onValueChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -84,7 +105,7 @@ fun EditProfileScreen(onSave: () -> Unit, onCancel: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Button(
-                    onClick = onCancel,
+                    onClick = {navController.popBackStack()},
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                     modifier = Modifier
                         .weight(1f)
@@ -99,7 +120,20 @@ fun EditProfileScreen(onSave: () -> Unit, onCancel: () -> Unit) {
                 }
 
                 Button(
-                    onClick = onSave,
+                    onClick = {
+                        viewModel.updatePengguna(
+                            namaLengkap = namaLengkap,
+                            namaPengguna = namaPengguna,
+                            email = email,
+                            onSucces = {
+                                Toast.makeText(context, "Profile berhasil dikirim", Toast.LENGTH_SHORT).show()
+                                navController.navigate("profile")
+                            },
+                            onError = { errorMessage ->
+                                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button_blue)),
                     modifier = Modifier
                         .weight(1f)
@@ -147,8 +181,5 @@ fun EditableField(label: String, value: String, onValueChange: (String) -> Unit)
 @Composable
 @Preview
 fun EditProfilePreview() {
-    EditProfileScreen(
-        onSave = { /* Save Action */ },
-        onCancel = { /* Cancel Action */ }
-    )
+//    EditProfileScreen()
 }

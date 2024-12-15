@@ -1,5 +1,6 @@
 package com.example.careerlink.frontend.register.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,6 +37,8 @@ fun RegisterScreen(modifier: Modifier = Modifier, viewModel: AuthViewModel = hil
     var username by remember { mutableStateOf("") }
     val registerState by viewModel.authState.collectAsState()
 
+    val context = LocalContext.current
+
     // Efek samping untuk navigasi saat registrasi berhasil
     LaunchedEffect(registerState) {
         when (registerState) {
@@ -45,9 +49,13 @@ fun RegisterScreen(modifier: Modifier = Modifier, viewModel: AuthViewModel = hil
                 }
             }
             is AuthState.Error -> {
-                // Opsional: Tampilkan pesan error dengan Snackbar atau dialog
+                val errorMessage = (registerState as AuthState.Error).message
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
             }
-            else -> {}
+            else -> {
+                val errorMessage = "Terjadi kesalahan"
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

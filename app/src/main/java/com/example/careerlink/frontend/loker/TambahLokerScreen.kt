@@ -83,7 +83,7 @@ fun TambahLokerScreen(
             TopBar("Lowongan Baru")
         },
         bottomBar = {
-            BottomBar()
+            BottomBar(navController = navController)
         }
     ) { paddingValues ->
         LazyColumn(

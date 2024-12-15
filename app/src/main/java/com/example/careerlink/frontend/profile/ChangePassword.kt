@@ -1,5 +1,7 @@
 package com.example.careerlink.frontend.profile
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,28 +13,37 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.MainTopBar
+import com.example.careerlink.viewmodels.PenggunaViewModel
 
 @Composable
-fun ChangePasswordScreen(onSave: () -> Unit, onCancel: () -> Unit) {
+fun ChangePasswordScreen(
+    viewModel: PenggunaViewModel = hiltViewModel(),
+    navController: NavController,
+    context: Context = LocalContext.current,
+    ) {
 
-    val oldPassword = remember { mutableStateOf("") }
-    val newPassword = remember { mutableStateOf("") }
-    val confirmPassword = remember { mutableStateOf("") }
+    var passwordLama by remember { mutableStateOf("") }
+    var passwordBaru by remember { mutableStateOf("") }
+    var konfirmasiPassword by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = { MainTopBar() }
@@ -58,24 +69,24 @@ fun ChangePasswordScreen(onSave: () -> Unit, onCancel: () -> Unit) {
 
             PasswordField(
                 label = "Old Password",
-                value = oldPassword.value,
-                onValueChange = { oldPassword.value = it }
+                value = passwordLama,
+                onValueChange = { passwordLama = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             PasswordField(
                 label = "New Password",
-                value = newPassword.value,
-                onValueChange = { newPassword.value = it }
+                value = passwordBaru,
+                onValueChange = { passwordBaru = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             PasswordField(
                 label = "Confirm New Password",
-                value = confirmPassword.value,
-                onValueChange = { confirmPassword.value = it }
+                value = konfirmasiPassword,
+                onValueChange = { konfirmasiPassword = it }
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -86,7 +97,9 @@ fun ChangePasswordScreen(onSave: () -> Unit, onCancel: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Button(
-                    onClick = onCancel,
+                    onClick = {
+                        navController.popBackStack()
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                     modifier = Modifier
                         .weight(1f)
@@ -101,7 +114,21 @@ fun ChangePasswordScreen(onSave: () -> Unit, onCancel: () -> Unit) {
                 }
 
                 Button(
-                    onClick = onSave,
+                    onClick = {
+                        viewModel.changePassword(
+                            context = context,
+                            passwordLama = passwordLama,
+                            passwordBaru = passwordBaru,
+                            konfirmasiPassword = konfirmasiPassword,
+                            onSucces = {
+                                Toast.makeText(context, "Profile berhasil dikirim", Toast.LENGTH_SHORT).show()
+                                navController.navigate("profile")
+                            },
+                            onError = { errorMessage ->
+                                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button_blue)),
                     modifier = Modifier
                         .weight(1f)
@@ -150,8 +177,5 @@ fun PasswordField(label: String, value: String, onValueChange: (String) -> Unit)
 @Composable
 @Preview
 fun ChangePasswordPreview() {
-    ChangePasswordScreen(
-        onSave = { /* Save Action */ },
-        onCancel = { /* Cancel Action */ }
-    )
+//    ChangePasswordScreen()
 }

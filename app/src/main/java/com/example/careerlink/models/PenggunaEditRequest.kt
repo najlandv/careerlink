@@ -2,11 +2,7 @@ package com.example.careerlink.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PenggunaData(
-
-
-    @SerializedName("id_pengguna")
-    val idPengguna: Int,
+data class PenggunaEditRequest(
 
     @SerializedName("nama_lengkap")
     val namaLengkap: String,

@@ -47,7 +47,7 @@ fun ListMyPostSertifikasiScreen(
             Spacer(modifier = Modifier.padding(vertical = 4.dp))
             MenuMyPost("Sertifikasi", navController)
         },
-        bottomBar = { BottomBar() },
+        bottomBar = { BottomBar(navController = navController) },
         floatingActionButton = { Button(modifier = Modifier,
             onClick = {
                 navController.navigate("add-magang")
@@ -86,7 +86,9 @@ fun ListMyPostSertifikasiScreen(
                         subtitle = "Deskripsi:",
                         desk = sertifikasi.deskripsi,
                         date = sertifikasi.tanggalPosting,
-                        onEdit = { },
+                        onEdit = {
+                            navController.navigate("edit-sertifikasi/${sertifikasi.idSertifikasi}")
+                        },
                         onDeleteConfirmed = {
                             viewModel.deleteSertifikasi(
                                 id = sertifikasi.idSertifikasi,
