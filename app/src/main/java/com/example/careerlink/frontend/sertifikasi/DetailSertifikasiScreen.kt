@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.careerlink.BuildConfig
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.SertifikasiViewModel
@@ -31,7 +32,7 @@ fun DetailSertifikasiScreen(
     navController: NavController
 ) {
     val sertifikasi by viewModel.sertifikasiDetail.collectAsState()
-    val baseUrl = "https://n6j4w26m-3000.asse.devtunnels.ms/"
+    val baseUrl = BuildConfig.BASE_URL
 
     LaunchedEffect(sertifikasiId) {
         viewModel.getSertifikasiById(sertifikasiId)
