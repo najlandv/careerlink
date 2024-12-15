@@ -1,5 +1,6 @@
 package com.example.careerlink.frontend.loker
 
+import LocationSearchViewModel
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
@@ -43,10 +44,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.BottomBar
+import com.example.careerlink.frontend.component.LocationSearchBar
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.LokerViewModel
 
@@ -67,6 +70,7 @@ fun TambahLokerScreen(
     var deskripsiLoker by remember { mutableStateOf("") }
     var kontak by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
+    val viewModelLocation: LocationSearchViewModel = viewModel()
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -140,18 +144,7 @@ fun TambahLokerScreen(
                         ),
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
-                    OutlinedTextField(
-                        value = alamat,
-                        onValueChange = { alamat = it },
-                        placeholder = { "Alamat" },
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFFFC107),
-                            unfocusedBorderColor = Color(0xFFFFC107)
-                        )
-                    )
+                    LocationSearchBar(viewModelLocation)
                     Spacer(modifier = Modifier.height(16.dp))
                     Text("Posisi",
 

@@ -1,5 +1,6 @@
 package com.example.careerlink.frontend.magang
 
+import LocationSearchViewModel
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
@@ -24,13 +25,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
+import com.example.careerlink.frontend.component.LocationSearchBar
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.MagangViewModel
 
@@ -53,6 +55,7 @@ fun TambahMagangScreen(
     var durasiMagang by remember { mutableStateOf("") }
     var kontak by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
+    val viewModelLocation: LocationSearchViewModel = viewModel()
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -88,15 +91,17 @@ fun TambahMagangScreen(
                         color = Color.Black,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
-                    TextField(
+                    OutlinedTextField(
                         value = perusahaan,
                         onValueChange = { perusahaan = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Masukkan nama perusahaan") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -108,16 +113,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = judulMagang,
                         onValueChange = { judulMagang = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Tambahkan judul magang") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -129,17 +135,7 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
-                        value = alamat,
-                        onValueChange = { alamat = it },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
-                        placeholder = { Text("Tambahkan alamat") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
-                    )
+                    LocationSearchBar(viewModelLocation)
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -150,16 +146,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = posisiMagang,
                         onValueChange = { posisiMagang = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Tambahkan posisi magang") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -171,16 +168,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = kualifikasi,
                         onValueChange = { kualifikasi = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Masukkan kualifikasi") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -192,16 +190,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = jenisMagang,
                         onValueChange = { jenisMagang = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Masukkan jenis magang") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -213,16 +212,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = durasiMagang,
                         onValueChange = { durasiMagang = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
-                        placeholder = { Text("Tambahkan judul magang") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                            .padding(vertical = 4.dp),
+                        placeholder = { Text("Tambahkan durasi magang") },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -234,16 +234,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = deskripsiMagang,
                         onValueChange = { deskripsiMagang = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Masukkan deskripsi") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -255,16 +256,17 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = kontak,
                         onValueChange = { kontak = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
-                            .border(1.dp, Color.Yellow, RoundedCornerShape(8.dp))
-                            .padding(4.dp),
+                            .padding(vertical = 4.dp),
                         placeholder = { Text("Tambahkan kontak") },
-                        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color(0xFFFFC107),
+                            unfocusedBorderColor = Color(0xFFFFC107)
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -351,6 +353,7 @@ fun TambahMagangScreen(
         }
     }
 }
+
 
 //@Preview(showBackground = true)
 //@Composable

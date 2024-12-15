@@ -27,7 +27,7 @@ fun DetailLokerScreen(modifier: Modifier = Modifier) {
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CardDetail()
+//                CardDetail()
 
             }
 
