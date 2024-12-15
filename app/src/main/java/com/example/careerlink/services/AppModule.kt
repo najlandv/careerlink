@@ -1,5 +1,6 @@
 package com.example.careerlink.services
 
+import com.example.careerlink.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,10 +13,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    private const val BASE_URL = BuildConfig.BASE_URL
+
     @Provides
     @Singleton
     fun provideBaseUrl(): String {
-        return "https://n6j4w26m-3000.asse.devtunnels.ms/"
+        return BASE_URL
     }
 
     @Provides

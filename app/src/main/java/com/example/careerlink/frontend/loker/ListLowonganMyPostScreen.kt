@@ -34,7 +34,10 @@ import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.LokerViewModel
 
 @Composable
-fun ListLowonganMyPostScreen(viewModel: LokerViewModel = hiltViewModel(), navController: NavController) {
+fun ListLowonganMyPostScreen(
+    viewModel: LokerViewModel = hiltViewModel(),
+    navController: NavController
+) {
     val myPostLokerList by viewModel.myPostLokerList.collectAsState()
     val errorMessage by viewModel.errorMessage.collectAsState()
     val context = LocalContext.current
@@ -51,7 +54,7 @@ fun ListLowonganMyPostScreen(viewModel: LokerViewModel = hiltViewModel(), navCon
                 MenuMyPost("Loker", navController)
             }
         },
-        bottomBar = { BottomBar()},
+        bottomBar = { BottomBar(navController = navController)},
         floatingActionButton = { Button(modifier = Modifier,
             onClick = {
                 navController.navigate("add-loker")
