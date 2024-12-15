@@ -49,8 +49,6 @@ fun ProfileScreen(
             Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_LONG).show()
         }
         else -> {
-            val errorMessage = "Terjadi kesalahan"
-            Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_LONG).show()
         }
     }
 

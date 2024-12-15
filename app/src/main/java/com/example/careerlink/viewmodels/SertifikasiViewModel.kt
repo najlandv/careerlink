@@ -93,7 +93,7 @@ class SertifikasiViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    onError("Terjadi kesalahan: ${e.message}")
+                    onError("Terjadi kesalahan11: ${e.message}")
                 }
             }
         }
@@ -151,7 +151,7 @@ class SertifikasiViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    onError("Terjadi kesalahan: ${e.message}")
+                    onError("Terjadi kesalahan12: ${e.message}")
                 }
             } else {
                 onError("Token tidak ditemukan")
@@ -180,7 +180,7 @@ class SertifikasiViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Terjadi kesalahan: ${e.message}"
+                    _errorMessage.value = "Terjadi kesalahan13: ${e.message}"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan"

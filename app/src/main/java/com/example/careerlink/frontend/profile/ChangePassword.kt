@@ -116,7 +116,6 @@ fun ChangePasswordScreen(
                 Button(
                     onClick = {
                         viewModel.changePassword(
-                            context = context,
                             passwordLama = passwordLama,
                             passwordBaru = passwordBaru,
                             konfirmasiPassword = konfirmasiPassword,

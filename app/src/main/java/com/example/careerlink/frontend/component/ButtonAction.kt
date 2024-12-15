@@ -23,7 +23,7 @@ fun ButtonAction(
 ) {
     Button(
         modifier = Modifier,
-        onClick = {},
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
             contentColor = textColor
