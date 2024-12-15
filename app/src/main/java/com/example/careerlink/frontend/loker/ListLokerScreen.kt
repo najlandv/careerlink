@@ -62,7 +62,8 @@ fun ListLokerScreen(
                         title = loker.judul_loker,
                         subtitle = "${loker.perusahaan} - ${loker.alamat}",
                         desk = loker.deskripsi_loker,
-                        date = loker.tanggal_posting
+                        date = loker.tanggal_posting,
+                        onClick = { navController.navigate("") }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }

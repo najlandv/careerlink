@@ -1,10 +1,11 @@
 package com.example.careerlink.services
 
-import com.example.careerlink.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -13,17 +14,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    private const val BASE_URL = BuildConfig.BASE_URL
-
     @Provides
     @Singleton
     fun provideBaseUrl(): String {
-        return BASE_URL
+        return "https://apicareerlink-production.up.railway.app/"
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(baseUrl: String): Retrofit {
+//        val logging = HttpLoggingInterceptor().apply {
+//            level = HttpLoggingInterceptor.Level.BODY
+//        }
+//        val client = OkHttpClient.Builder()
+//            .addInterceptor(logging)
+//            .build()
+
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

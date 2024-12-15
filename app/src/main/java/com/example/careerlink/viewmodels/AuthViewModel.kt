@@ -55,8 +55,8 @@ class AuthViewModel @Inject constructor(
                     email = email,
                     password = password,
                     confirmPassword = confirmPassword,
-                    fullName = fullName,
-                    username = username
+                    namaLengkap = fullName,
+                    namaPengguna = username
                 )
             )
             _authState.value = AuthState.RegisterSuccess(registerResponse.message)

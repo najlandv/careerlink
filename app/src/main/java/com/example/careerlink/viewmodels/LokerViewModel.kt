@@ -48,7 +48,7 @@ class LokerViewModel @Inject constructor(
                     _lokerList.value = response.data
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Gagal mengambil data loker: ${e.message}"
+                    _errorMessage.value = "Data loker tidak ditemukan"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan."
@@ -65,7 +65,7 @@ class LokerViewModel @Inject constructor(
                     _myPostLokerList.value = response.data
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Gagal mengambil data loker: ${e.message}"
+                    _errorMessage.value = "Data Loker tidak ditemukan"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan."
@@ -131,7 +131,7 @@ class LokerViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    onError("Terjadi kesalahan: ${e.message}")
+                    onError("Terjadi kesalahan1: ${e.message}")
                 }
             } else {
                 onError("Token tidak ditemukan.")
@@ -161,7 +161,7 @@ class LokerViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    onError("Terjadi kesalahan: ${e.message}")
+                    onError("Terjadi kesalahan2: ${e.message}")
                 }
             } else {
                 onError("Token tidak ditemukan.")
@@ -187,7 +187,7 @@ class LokerViewModel @Inject constructor(
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Terjadi kesalahan: ${e.message}"
+                    _errorMessage.value = "Terjadi kesalahan3: ${e.message}"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan."
@@ -255,7 +255,7 @@ class LokerViewModel @Inject constructor(
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        onError("Terjadi kesalahan: ${e.message}")
+                        onError("Terjadi kesalahan4: ${e.message}")
                     }
                 } else {
                     onError("Token tidak ditemukan.")

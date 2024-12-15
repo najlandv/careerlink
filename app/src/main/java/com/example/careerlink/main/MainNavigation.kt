@@ -11,7 +11,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.careerlink.data.TokenDataStore
 import com.example.careerlink.frontend.home.HomeScreen
+import com.example.careerlink.frontend.home.LandingScreen
 import com.example.careerlink.frontend.login.screen.LoginScreen
+import com.example.careerlink.frontend.loker.DetailLokerScreen
 import com.example.careerlink.frontend.loker.EditLokerScreen
 import com.example.careerlink.frontend.loker.ListLokerScreen
 import com.example.careerlink.frontend.loker.ListLowonganMyPostScreen
@@ -35,8 +37,13 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
 
     NavHost(
         navController = navController,
-        startDestination = if (token.isNullOrBlank()) "login" else "home"
+        startDestination = if (token.isNullOrBlank()) "landing-screen" else "home"
     ) {
+//        Landing Screen
+        composable("landing-screen") {
+            LandingScreen(navController = navController)
+        }
+
 //        Authentication
         composable("login") {
 //            LoginScreen(navController = navController)
@@ -53,10 +60,18 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
 
 //        Loker
         composable("list-loker") {
-            ListLokerScreen()
+            ListLokerScreen(navController = navController)
         }
         composable("list-loker-my-post") {
             ListLowonganMyPostScreen(navController = navController)
+        }
+        composable("detail-loker/{id}") { backStackEntry ->
+            val lokerId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (lokerId != null) {
+                DetailLokerScreen (lokerId = lokerId, navController = navController)
+            } else {
+                println("Error: Invalid loker ID")
+            }
         }
         composable("add-loker") {
             TambahLokerScreen(navController = navController)
@@ -83,7 +98,7 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
             if (magangId != null) {
                 DetailMagangScreen (magangId = magangId, navController = navController)
             } else {
-                println("Error: Invalid loker ID")
+                println("Error: Invalid magang ID")
             }
         }
         composable("add-magang") {
@@ -94,7 +109,7 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
             if (magangId != null) {
                 EditMagangScreen(magangId = magangId, navController = navController)
             } else {
-                println("Error: Invalid loker ID")
+                println("Error: Invalid magang ID")
             }
         }
 
@@ -110,7 +125,7 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
             if (sertifikasiId != null) {
                 DetailSertifikasiScreen(sertifikasiId = sertifikasiId, navController = navController)
             } else {
-                println("Error: Invalid loker ID")
+                println("Error: Invalid sertifikasi ID")
             }
         }
         composable("add-sertfikasi") {
@@ -121,7 +136,7 @@ fun MainNavigation(tokenDataStore: TokenDataStore) {
             if (sertifikasiId != null) {
                 EditSertifikasiScreen(sertifikasiId = sertifikasiId, navController = navController)
             } else {
-                println("Error: Invalid loker ID")
+                println("Error: Invalid sertifikasi ID")
             }
         }
 

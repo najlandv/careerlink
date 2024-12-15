@@ -14,11 +14,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.ButtonAction
 
 @Composable
-fun LandingScreen() {
+fun LandingScreen(
+    navController: NavController
+) {
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -74,14 +78,14 @@ fun LandingScreen() {
                 text = "Daftar",
                 backgroundColor = colorResource(R.color.button_blue),
                 textColor = androidx.compose.ui.graphics.Color.White,
-                onClick = {  }
+                onClick = { navController.navigate("register") }
             )
             Spacer(modifier = Modifier.width(16.dp))
             ButtonAction(
                 text = "Masuk",
                 backgroundColor = androidx.compose.ui.graphics.Color(0xFFCCCCCC),
                 textColor = androidx.compose.ui.graphics.Color.Black,
-                onClick = { }
+                onClick = { navController.navigate("login") }
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -91,5 +95,6 @@ fun LandingScreen() {
 @Preview
 @Composable
 private fun LandingScreenPrev() {
-    LandingScreen()
+    val navController = rememberNavController()
+    LandingScreen(navController)
 }
