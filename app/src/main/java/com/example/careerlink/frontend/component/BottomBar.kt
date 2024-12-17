@@ -33,7 +33,10 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController ) {
         BottomBarItem(
             iconRes = R.drawable.baseline_home_24,
             label = "Home",
-            onClick = { navController.navigate("home") }
+            onClick = { navController.navigate("home") {
+                popUpTo(0) { inclusive = true }
+                launchSingleTop = true
+            } }
         )
         BottomBarItem(
             iconRes = R.drawable.baseline_post_add_24,

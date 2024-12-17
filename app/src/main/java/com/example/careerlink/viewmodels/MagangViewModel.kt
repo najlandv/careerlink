@@ -37,6 +37,7 @@ class MagangViewModel @Inject constructor(
 
     init {
         fetchMagangList()
+        fetchMyPostMagangList()
     }
 
     private fun fetchMagangList() {
@@ -48,7 +49,7 @@ class MagangViewModel @Inject constructor(
                     _magangList.value = response.data
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Gagal mengambil data magang: ${e.message}"
+                    _errorMessage.value = "Data tidak ditemukan"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan."
@@ -65,7 +66,7 @@ class MagangViewModel @Inject constructor(
                     _myPostMagangList.value = response.data
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Gagal mengambil data magang: ${e.message}"
+                    _errorMessage.value = "Data tidak ditemukan"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan"
