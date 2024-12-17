@@ -37,6 +37,7 @@ class LokerViewModel @Inject constructor(
 
     init {
         fetchLokerList()
+        fetchMyPostLokerList()
     }
 
     private fun fetchLokerList() {

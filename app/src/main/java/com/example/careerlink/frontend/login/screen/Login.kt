@@ -67,15 +67,15 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController, vie
         CustomOutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = "Nama Pengguna",
-            placeholder = "Masukkan nama pengguna"
+            label = "Email",
+            placeholder = "Masukkan email"
         )
 
         CustomOutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = "Password",
-            placeholder = "Password",
+            placeholder = "Masukkan Password",
         )
 
         StyledButton(

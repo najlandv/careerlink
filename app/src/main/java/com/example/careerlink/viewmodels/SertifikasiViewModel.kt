@@ -49,7 +49,7 @@ class SertifikasiViewModel @Inject constructor(
                     _sertifikasiList.value = response.data
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Gagal mengambil data sertifikasi: ${e.message}"
+                    _errorMessage.value = "Data tidak ditemukan"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan."
@@ -66,7 +66,7 @@ class SertifikasiViewModel @Inject constructor(
                     _myPostSertifikasiList.value = response.data
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _errorMessage.value = "Gagal mengambil data sertifikasi: ${e.message}"
+                    _errorMessage.value = "Data tidak ditemukan"
                 }
             } else {
                 _errorMessage.value = "Token tidak ditemukan"
