@@ -23,28 +23,33 @@ fun TopBar(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {}
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(colorResource(R.color.cream))
-            .padding(vertical = 12.dp, horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-            contentDescription = "Back",
-            tint = Color.Black,
-            modifier = Modifier
-                .size(28.dp)
-                .clickable { onBackClick() }
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(
-            text = text,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color.Black
-        )
+    Column(modifier = modifier
+        .fillMaxWidth()
+        .background(colorResource(R.color.cream))) {
+        Spacer(modifier = Modifier.height(20.dp))
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(colorResource(R.color.cream))
+                .padding(vertical = 12.dp, horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                contentDescription = "Back",
+                tint = Color.Black,
+                modifier = Modifier
+                    .size(28.dp)
+                    .clickable { onBackClick() }
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = text,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Black
+            )
+        }
     }
 }
 

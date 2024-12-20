@@ -72,16 +72,12 @@ fun ListPostMagangSayaScreen(
                     .padding(16.dp)
             )
         } else {
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 16.dp)
-            ) {
+
                 Spacer(modifier = Modifier.height(16.dp))
 
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.padding(paddingValues)
+                        .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(myPostMagangList) { magang ->
@@ -115,7 +111,7 @@ fun ListPostMagangSayaScreen(
                         )
                     }
                 }
-            }
+
         }
     }
 }

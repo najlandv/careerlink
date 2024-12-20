@@ -2,7 +2,9 @@ package com.example.careerlink.frontend.login.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.careerlink.frontend.login.component.CustomOutlinedTextField
+import com.example.careerlink.frontend.login.component.CustomPasswordTextField
 import com.example.careerlink.frontend.login.component.StyledButton
 import com.example.careerlink.viewmodels.AuthState
 import com.example.careerlink.viewmodels.AuthViewModel
@@ -38,7 +41,7 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController, vie
     LaunchedEffect(loginState) {
         when (loginState) {
             is AuthState.LoginSuccess -> {
-                navController.navigate("list-loker") {
+                navController.navigate("home") {
                     popUpTo("login") { inclusive = true }
                 }
             }
@@ -56,6 +59,8 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController, vie
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(24.dp))
+
         Text(
             text = "Masuk",
             fontSize = 24.sp,
@@ -71,7 +76,7 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController, vie
             placeholder = "Masukkan email"
         )
 
-        CustomOutlinedTextField(
+        CustomPasswordTextField(
             value = password,
             onValueChange = { password = it },
             label = "Password",

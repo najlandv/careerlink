@@ -100,12 +100,7 @@ fun EditMagangScreen(
         ) {
             if (magang != null) {
                 item {
-                    Column(
-                        modifier = modifier
-                            .fillMaxSize()
-                            .padding(paddingValues)
-                            .padding(16.dp)
-                    ) {
+
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
@@ -381,7 +376,7 @@ fun EditMagangScreen(
                             )
                         }
                     }
-                }
+
             }
         }
     }

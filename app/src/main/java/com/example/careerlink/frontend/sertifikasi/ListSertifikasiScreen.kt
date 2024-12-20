@@ -35,12 +35,7 @@ fun ListSertifikasiScreen(
             )
         },
         content = { paddingValues ->
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 16.dp)
-            ) {
+
                 if (!errorMessage.isNullOrEmpty()) {
                     Text(
                         text = errorMessage!!,
@@ -69,7 +64,7 @@ fun ListSertifikasiScreen(
                         }
                     }
                 }
-            }
+
         }
     )
 }

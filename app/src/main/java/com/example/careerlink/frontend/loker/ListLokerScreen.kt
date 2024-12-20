@@ -33,7 +33,10 @@ fun ListLokerScreen(
 
     Scaffold(
         topBar = {
-            TopBar("Lowongan Kerja")
+            TopBar(
+                "Lowongan Kerja",
+                onBackClick = { navController.popBackStack() },
+            )
         },
         bottomBar = {
             BottomBar(navController = navController)

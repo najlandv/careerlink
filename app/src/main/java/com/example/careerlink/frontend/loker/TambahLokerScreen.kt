@@ -51,6 +51,7 @@ import com.example.careerlink.R
 import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.LocationSearchBar
 import com.example.careerlink.frontend.component.TopBar
+import com.example.careerlink.services.LocationResult
 import com.example.careerlink.viewmodels.LokerViewModel
 
 @Composable
@@ -60,6 +61,7 @@ fun TambahLokerScreen(
     context: Context = LocalContext.current,
     navController: NavController
     ) {
+    var selectedLocation by remember { mutableStateOf<LocationResult?>(null) }
 
     var perusahaan by remember { mutableStateOf("") }
     var judulLoker by remember { mutableStateOf("") }
@@ -144,7 +146,12 @@ fun TambahLokerScreen(
                         ),
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
-                    LocationSearchBar(viewModelLocation)
+                    LocationSearchBar(viewModelLocation,
+                        onLocationSelected = { location ->
+                            selectedLocation = location
+                            alamat = location.display_name
+                        }
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text("Posisi",
 

@@ -36,12 +36,6 @@ fun ListMagangScreen(
             )
         },
         content = { paddingValues ->
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 16.dp)
-            ) {
                 if (!errorMessage.isNullOrEmpty()) {
                     Text(
                         text = errorMessage!!,
@@ -56,7 +50,8 @@ fun ListMagangScreen(
                     )
                 } else {
                     LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.padding(paddingValues)
+                            .padding(horizontal = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         items(magangList) { magang ->
@@ -70,7 +65,7 @@ fun ListMagangScreen(
                         }
                     }
                 }
-            }
+
         }
     )
 }
