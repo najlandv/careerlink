@@ -142,8 +142,3 @@ fun CardDetail(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//private fun CardDetailPrev() {
-//    CardDetail()
-//}

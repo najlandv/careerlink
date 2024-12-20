@@ -75,12 +75,6 @@ fun ListLokerScreen(
     }
 }
 
-//data class Loker(
-//    val title: String,
-//    val subtitle: String,
-//    val desk: String,
-//    val date: String
-//)
 
 @Preview(showBackground = true)
 @Composable
