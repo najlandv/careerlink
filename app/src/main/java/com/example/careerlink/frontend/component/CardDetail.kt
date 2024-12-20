@@ -42,6 +42,7 @@ fun CardDetail(
     deskripsi: String = "",
     durasi: String = "",
     kontak: String = "",
+    tanggalPelaksanaan: String = "",
     harga: String = "",
     gambar: String? = null
 ) {
@@ -83,15 +84,22 @@ fun CardDetail(
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(judul)
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Posisi :")
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(posisi)
-                        Spacer(modifier = Modifier.height(16.dp))
+                        if (posisi != ""){
+                            Text("Posisi :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(posisi)
+                            Spacer(modifier = Modifier.height(16.dp))
+                        }
                         Text("Deskripsi :")
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(deskripsi)
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text(kualifikasi)
+                        if (kualifikasi != ""){
+                            Text("Kualifikasi :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(kualifikasi)
+                            Spacer(modifier = Modifier.height(16.dp))
+                        }
                         if (durasi !== ""){
                             Spacer(modifier = Modifier.height(16.dp))
                             Text("Durasi Magang :")
@@ -108,21 +116,30 @@ fun CardDetail(
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(harga)
                         }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text("Alamat :")
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = alamat,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)
-                                .clickable {
-                                    // Redirect to Google Maps
-                                    val uri = Uri.parse("geo:?q=${alamat}")
-                                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                                    intent.setPackage("com.google.android.apps.maps")
-                                    context.startActivity(intent)
-                                })
+                        if (tanggalPelaksanaan != ""){
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Tanggal Pelaksanaan :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(tanggalPelaksanaan)
+                        }
+                        if(alamat != ""){
+
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Alamat :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = alamat,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+                                    .clickable {
+                                        // Redirect to Google Maps
+                                        val uri = Uri.parse("geo:?q=${alamat}")
+                                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                                        intent.setPackage("com.google.android.apps.maps")
+                                        context.startActivity(intent)
+                                    })
+                        }
                     }
                 }
             Spacer(modifier = Modifier.height(8.dp))

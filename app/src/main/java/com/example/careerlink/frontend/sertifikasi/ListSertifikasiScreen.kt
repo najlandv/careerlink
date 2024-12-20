@@ -50,7 +50,8 @@ fun ListSertifikasiScreen(
                     )
                 } else {
                     LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.padding(paddingValues)
+                            .padding(horizontal = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         items(sertifikasiList) { sertifikasi ->

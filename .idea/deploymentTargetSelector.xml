@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-12-19T16:38:11.245246700Z">
+        <DropdownSelection timestamp="2024-12-20T12:43:24.576744300Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\angga\.android\avd\Pixel_4_API_30_Gua.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\angga\.android\avd\GoogleGue.avd" />
             </handle>
           </Target>
         </DropdownSelection>

@@ -44,7 +44,7 @@ fun DetailLokerScreen(
 
     Scaffold(
         topBar = {
-            TopBar("Edit Postingan Lowongan Kerja", onBackClick = { navController.popBackStack() })
+            TopBar("Datail Lowongan Kerja", onBackClick = { navController.popBackStack() })
         },
         bottomBar = {
             BottomBar(navController = navController)
@@ -58,13 +58,13 @@ fun DetailLokerScreen(
             item {
 
                 CardDetail(
-                    penulis = loker!!.Pengguna.namaLengkap,
-                    perusahaan = loker!!.perusahaan,
-                    alamat = loker!!.alamat,
-                    kualifikasi = loker!!.kualifikasi,
-                    posisi = loker!!.posisi_loker,
-                    deskripsi = loker!!.deskripsi_loker,
-                    judul = loker!!.judul_loker,
+                    penulis = loker?.Pengguna?.namaLengkap ?: "Unkown" ,
+                    perusahaan = loker?.perusahaan ?: "Nama Perusahaan Tidak tersedia",
+                    alamat = loker?.alamat ?: "Alamat Tidak Tersedia",
+                    kualifikasi = loker?.kualifikasi ?: "Kualifikasi Tidak tersedia",
+                    posisi = loker?.posisi_loker ?: "Posisi loker kosong",
+                    deskripsi = loker?.deskripsi_loker ?: "Tidak ada deskripsi",
+                    judul = loker?.judul_loker ?: "Tidak ada judul",
                     gambar = imageUrl
                 )
             }

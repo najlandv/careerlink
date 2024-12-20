@@ -223,7 +223,8 @@ class SertifikasiViewModel @Inject constructor(
                         MultipartBody.Part.createFormData("gambar_sertifikasi", "image.jpg", requestBody)
                     }
 
-                    val response = sertifikasiApiService.postSertifikasi(
+                    val response = sertifikasiApiService.updateSertifikasi(
+                        id = id,
                         token = "Bearer $token",
                         instansi = instansiBody,
                         judulSertifiksai = judulSertifiksaiBody,

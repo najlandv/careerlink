@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,6 +58,21 @@ fun EditSertifikasiScreen(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         imageUri = uri
+    }
+
+    LaunchedEffect(sertifikasiId) {
+        viewModel.getSertifikasiById(sertifikasiId)
+    }
+
+    LaunchedEffect(sertifikasi) {
+        if (sertifikasi != null) {
+            instansi = sertifikasi!!.instansi
+            judulSertifikasi = sertifikasi!!.judulSertifikasi
+            deskripsi = sertifikasi!!.deskripsi
+            tanggalPelaksanaan = sertifikasi!!.tanggalPelaksanaan
+            kontak = sertifikasi!!.kontak
+            harga = sertifikasi!!.harga
+        }
     }
 
     Scaffold(

@@ -68,12 +68,13 @@ fun DetailSertifikasiScreen(
                     item {
 
                         CardDetail(
-                            penulis = sertifikasi!!.Pengguna.namaLengkap ,
+                            penulis = sertifikasi?.Pengguna?.namaLengkap ?: "Unkown"  ,
                             perusahaan = sertifikasi?.instansi ?: "Nama Instansi Tidak tersedia",
                             deskripsi = sertifikasi?.deskripsi ?: "Tidak ada deskripsi",
                             judul = sertifikasi?.judulSertifikasi ?: "Judul tidak tersedia",
                             kontak = sertifikasi?.kontak ?: "",
                             harga = sertifikasi?.harga ?: "",
+                            tanggalPelaksanaan = sertifikasi?.tanggalPelaksanaan ?: "",
                             gambar = imageUrl
                         )
                     }

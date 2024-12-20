@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.CardAction
+import com.example.careerlink.frontend.component.MainTopBar
 import com.example.careerlink.frontend.component.MenuMyPost
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.MagangViewModel
@@ -42,7 +43,7 @@ fun ListPostMagangSayaScreen(
     Scaffold(
         topBar = {
             Column {
-                TopBar("Postingan Saya")
+                MainTopBar()
                 Spacer(modifier = Modifier.padding(vertical = 4.dp))
                 MenuMyPost("Magang", navController)
             }
