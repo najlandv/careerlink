@@ -16,7 +16,7 @@ import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.SertifikasiViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun ListSertifikasiScreen(
     modifier: Modifier = Modifier,

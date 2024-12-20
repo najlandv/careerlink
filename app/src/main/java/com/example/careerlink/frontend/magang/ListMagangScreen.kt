@@ -17,7 +17,7 @@ import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.viewmodels.MagangViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun ListMagangScreen(
     modifier: Modifier = Modifier,

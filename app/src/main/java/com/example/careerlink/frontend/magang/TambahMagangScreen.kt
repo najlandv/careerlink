@@ -37,7 +37,7 @@ import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.services.LocationResult
 import com.example.careerlink.viewmodels.MagangViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun TambahMagangScreen(
     modifier: Modifier = Modifier,

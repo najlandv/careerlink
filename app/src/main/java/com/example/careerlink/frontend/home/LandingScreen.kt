@@ -68,7 +68,7 @@ fun LandingScreen(
             modifier = Modifier.padding(horizontal = 16.dp)
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.5f))
 
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
