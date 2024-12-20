@@ -91,82 +91,9 @@ fun DetailMagangScreen(
 
                 }
             }
-//            Column(
-//                modifier = modifier
-//                    .fillMaxSize()
-//                    .padding(paddingValues)
-//                    .verticalScroll(rememberScrollState())
-//            ) {
-//                Spacer(modifier = Modifier.height(16.dp))
-//
-//                if (magang == null) {
-//                    Text(
-//                        text = "Loading...",
-//                        fontSize = 16.sp,
-//                        color = Color.Gray,
-//                        modifier = Modifier.fillMaxWidth(),
-//                        textAlign = TextAlign.Center
-//                    )
-//                } else {
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(horizontal = 16.dp),
-//                        verticalArrangement = Arrangement.spacedBy(8.dp)
-//                    ) {
-//                        Text(
-//                            text = magang?.tanggalPosting ?: "Tanggal tidak tersedia",
-//                            fontSize = 14.sp,
-//                            color = Color.Black,
-//                            fontWeight = FontWeight.Light
-//                        )
-//
-//                        Text(
-//                            text = magang?.judulMagang ?: "Tidak ada judul",
-//                            fontSize = 20.sp,
-//                            fontWeight = FontWeight.Bold,
-//                            color = colorResource(R.color.button_blue)
-//                        )
-//
-//                        Spacer(modifier = Modifier.height(8.dp))
-//
-//                        Text(
-//                            text = "Deskripsi Magang:",
-//                            fontSize = 16.sp,
-//                            fontWeight = FontWeight.SemiBold,
-//                            color = Color.Black
-//                        )
-//                        Text(
-//                            text = magang?.deskripsiMagang ?: "Tidak ada deskripsi",
-//                            fontSize = 14.sp,
-//                            color = Color.Black
-//                        )
-//
-//                        Spacer(modifier = Modifier.height(16.dp))
-//
-//                        if (!magang?.gambarMagang.isNullOrEmpty()) {
-//                            val imageUrl = baseUrl + magang!!.gambarMagang
-//                            Image(
-//                                painter = rememberAsyncImagePainter(model = imageUrl),
-//                                contentDescription = "Magang Image",
-//                                modifier = Modifier
-//                                    .fillMaxWidth()
-//                                    .height(200.dp),
-//                                contentScale = ContentScale.Crop
-//                            )
-//                        }
-//
-//                        Spacer(modifier = Modifier.height(16.dp))
-//
-//                    }
-//                }
-//            }
+
         }
     )
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DetailMagangScreenPreview() {
-//    DetailMagangScreen()
-//}
+

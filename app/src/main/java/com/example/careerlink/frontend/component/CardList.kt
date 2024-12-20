@@ -73,5 +73,5 @@ fun CardList(
 @Preview(showBackground = true)
 @Composable
 private fun CardListPrev() {
-//    CardList()
+
 }

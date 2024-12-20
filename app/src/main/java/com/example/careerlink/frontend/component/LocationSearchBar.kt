@@ -82,7 +82,7 @@ fun LocationSearchBar(viewModel: LocationSearchViewModel, onLocationSelected: (L
                     DropdownMenuItem(
                         text = { Text("No results found") },
                         onClick = {
-//                            onLocationSelected(searchText)
+
                         }
                     )
                 }

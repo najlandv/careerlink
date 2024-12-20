@@ -77,8 +77,4 @@ fun BottomBarItem(iconRes: Int, label: String, onClick: () -> Unit) {
     }
 }
 
-@Preview
-@Composable
-private fun BottomBarPrev() {
-//    BottomBar()
-}
+
