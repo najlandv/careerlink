@@ -42,6 +42,9 @@ fun DetailMagangScreen(
     LaunchedEffect(magangId) {
         viewModel.getMagangById(magangId)
     }
+    LaunchedEffect(magang) {
+        println("Magang nya ini : " + magang)
+    }
 
     Scaffold(
         topBar = {

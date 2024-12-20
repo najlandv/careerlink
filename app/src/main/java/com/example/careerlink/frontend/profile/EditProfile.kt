@@ -47,10 +47,11 @@ fun EditProfileScreen(
     var namaPengguna by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
 
+
     LaunchedEffect(pengguna) {
-        namaLengkap = pengguna!!.namaLengkap
-        namaPengguna = pengguna!!.namaPengguna
-        email = pengguna!!.email
+        namaLengkap = pengguna?.namaLengkap ?: ""
+        namaPengguna = pengguna?.namaPengguna ?: ""
+        email = pengguna?.email ?: ""
     }
 
     Scaffold(

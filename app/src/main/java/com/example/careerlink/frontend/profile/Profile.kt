@@ -42,7 +42,7 @@ fun ProfileScreen(
 
     when (authState) {
         is AuthState.Logout -> {
-            navController.navigate("login")
+            navController.navigate("landing-screen")
         }
         is AuthState.Error -> {
             val errorMessage = (authState as AuthState.Error).message
@@ -101,7 +101,7 @@ fun ProfileScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {navController.navigate("edit-profile")},
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button_blue)),
                     modifier = Modifier
                         .weight(1f)
