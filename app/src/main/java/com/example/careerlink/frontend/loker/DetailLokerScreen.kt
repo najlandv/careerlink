@@ -38,7 +38,7 @@ fun DetailLokerScreen(
 
     var imageUrl by remember { mutableStateOf("") }
 
-    if (loker!!.gambar_loker != null) {
+    if (!loker?.gambar_loker.isNullOrEmpty()) {
         imageUrl = baseUrl + loker!!.gambar_loker
     }
 
@@ -60,8 +60,11 @@ fun DetailLokerScreen(
                 CardDetail(
                     penulis = loker!!.Pengguna.namaLengkap,
                     perusahaan = loker!!.perusahaan,
+                    alamat = loker!!.alamat,
+                    kualifikasi = loker!!.kualifikasi,
                     posisi = loker!!.posisi_loker,
                     deskripsi = loker!!.deskripsi_loker,
+                    judul = loker!!.judul_loker,
                     gambar = imageUrl
                 )
             }

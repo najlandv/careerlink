@@ -3,7 +3,9 @@ package com.example.careerlink.frontend.register.screen
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.careerlink.frontend.register.component.CustomOutlinedTextRegister
+import com.example.careerlink.frontend.register.component.CustomPasswordRegTextField
 import com.example.careerlink.frontend.register.component.StyledButtonRegister
 import com.example.careerlink.viewmodels.AuthState
 import com.example.careerlink.viewmodels.AuthViewModel
@@ -66,6 +69,7 @@ fun RegisterScreen(modifier: Modifier = Modifier, viewModel: AuthViewModel = hil
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = "Buat Akun",
             fontSize = 24.sp,
@@ -101,7 +105,7 @@ fun RegisterScreen(modifier: Modifier = Modifier, viewModel: AuthViewModel = hil
         )
 
         // Field for Password
-        CustomOutlinedTextRegister(
+        CustomPasswordRegTextField(
             value = password,
             onValueChange = { value -> password = value },
             label = "Password",
@@ -109,7 +113,7 @@ fun RegisterScreen(modifier: Modifier = Modifier, viewModel: AuthViewModel = hil
         )
 
         // Field for Confirm Password
-        CustomOutlinedTextRegister(
+        CustomPasswordRegTextField(
             value = confirmPassword,
             onValueChange = { value ->
                 confirmPassword = value

@@ -34,6 +34,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.LocationSearchBar
 import com.example.careerlink.frontend.component.TopBar
+import com.example.careerlink.services.LocationResult
 import com.example.careerlink.viewmodels.MagangViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,6 +45,7 @@ fun TambahMagangScreen(
     context: Context = LocalContext.current,
     navController: NavController
 ) {
+    var selectedLocation by remember { mutableStateOf<LocationResult?>(null) }
 
     var perusahaan by remember { mutableStateOf("") }
     var judulMagang by remember { mutableStateOf("") }
@@ -77,13 +79,8 @@ fun TambahMagangScreen(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                Column(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .padding(16.dp)
-                ) {
-                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         text = "Perusahaan",
@@ -135,7 +132,12 @@ fun TambahMagangScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    LocationSearchBar(viewModelLocation)
+                    LocationSearchBar(viewModelLocation,
+                        onLocationSelected = { location ->
+                            selectedLocation = location
+                            alamat = location.display_name
+                        }
+                    )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -349,7 +351,7 @@ fun TambahMagangScreen(
                         )
                     }
                 }
-            }
+
         }
     }
 }

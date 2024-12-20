@@ -1,5 +1,6 @@
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -41,16 +42,18 @@ fun ListMyPostSertifikasiScreen(
 
     Scaffold(
         topBar = {
-            TopBar(
-                text = "Postingan Saya",
-            )
-            Spacer(modifier = Modifier.padding(vertical = 4.dp))
-            MenuMyPost("Sertifikasi", navController)
+            Column {
+                TopBar(
+                    text = "Postingan Saya",
+                )
+                Spacer(modifier = Modifier.padding(vertical = 4.dp))
+                MenuMyPost("Sertifikasi", navController)
+            }
         },
         bottomBar = { BottomBar(navController = navController) },
         floatingActionButton = { Button(modifier = Modifier,
             onClick = {
-                navController.navigate("add-magang")
+                navController.navigate("add-sertfikasi")
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(id = R.color.button_blue),

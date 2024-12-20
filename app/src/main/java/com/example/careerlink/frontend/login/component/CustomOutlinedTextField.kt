@@ -10,6 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -32,6 +35,34 @@ fun CustomOutlinedTextField(
             .padding(vertical = 4.dp),
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color(0xFFFFC107),
+            unfocusedBorderColor = Color(0xFFFFC107)
+        )
+    )
+}
+
+@Composable
+fun CustomPasswordTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    placeholder: String,
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
+    keyboardActions: KeyboardActions = KeyboardActions.Default
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        placeholder = { Text(placeholder) },
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        visualTransformation = PasswordVisualTransformation(),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color(0xFFFFC107),
             unfocusedBorderColor = Color(0xFFFFC107)

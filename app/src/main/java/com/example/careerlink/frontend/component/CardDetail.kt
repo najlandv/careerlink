@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -39,15 +40,24 @@ import com.example.careerlink.services.LocationResult
 fun CardDetail(
     modifier: Modifier = Modifier,
     penulis: String = "Penulis",
-    perusahaan: String = "Perusahaan",
-    posisi: String = "Posisi",
-    deskripsi: String = "Deskripsi",
+    perusahaan: String = "",
+    judul: String ="",
+    kualifikasi: String ="",
+    alamat: String="",
+    posisi: String = "",
+    deskripsi: String = "",
+    durasi: String = "",
+    kontak: String = "",
+    harga: String = "",
     gambar: String? = null
 ) {
+
     Card(modifier = Modifier
         .fillMaxWidth(),
         colors = CardDefaults.cardColors(Color(0xFFFFDE59)),
     ) {
+        val context = LocalContext.current
+
         Column(modifier = Modifier.padding(24.dp).fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Row(modifier = Modifier.fillMaxWidth(),
@@ -62,7 +72,7 @@ fun CardDetail(
                             color = Color.Black
                         )
                     )
-                    Text("9 Juli 2020")
+//                    Text("9 Juli 2020")
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
@@ -77,25 +87,44 @@ fun CardDetail(
                 Card(colors = CardDefaults.cardColors(Color.White),
                     modifier = Modifier.padding(4.dp).fillMaxWidth()) {
                     Column(modifier = Modifier.padding(16.dp)) {
+                        Text(judul)
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text("Posisi :")
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(posisi)
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Deskripsi Pekerjaan :")
+                        Text("Deskripsi :")
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(deskripsi)
-                   
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(kualifikasi)
+                        if (durasi !== ""){
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Durasi Magang :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(durasi)
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Kontak :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(kontak)
+                        }
+                        if (harga !== ""){
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Harga :")
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(harga)
+                        }
                         Spacer(modifier = Modifier.height(16.dp))
                         Text("Alamat :")
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Masjid Raya Syekh Ahmad Khatib Al-Minangkabawi Sumatera Barat",
+                            text = alamat,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(8.dp)
                                 .clickable {
                                     // Redirect to Google Maps
-                                    val uri = Uri.parse("geo:${"-0.925832"},${"100.362787"}?q=${"Masjid Raya Syekh Ahmad Khatib Al-Minangkabawi Sumatera Barat"}")
+                                    val uri = Uri.parse("geo:?q=${alamat}")
                                     val intent = Intent(Intent.ACTION_VIEW, uri)
                                     intent.setPackage("com.google.android.apps.maps")
                                     context.startActivity(intent)
@@ -103,13 +132,6 @@ fun CardDetail(
                     }
                 }
             Spacer(modifier = Modifier.height(8.dp))
-            if (gambar != "") {
-                Image(
-                    painterResource(R.drawable.gambar_contoh),
-                    "Test",
-                    modifier = Modifier.size(250.dp)
-                )
-            }
             Image(
                 rememberAsyncImagePainter(model = gambar),
                 "Test",
