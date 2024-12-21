@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.careerlink.R
 import com.example.careerlink.frontend.component.TopBar
+import com.example.careerlink.services.NotificationService
 import com.example.careerlink.viewmodels.SertifikasiViewModel
 
 @Composable
@@ -232,8 +233,19 @@ fun TambahSertifikasiScreen(
                             kontak = kontak,
                             harga = harga,
                             imageUri = imageUri,
+
                             onSucces = {
+                                // Mengirim notifikasi
+                                NotificationService.sendNotification(
+                                    context,
+                                    "Sertifikasi Baru",
+                                    "Sertifikasi baru berhasil ditambahkan: $judulSertifikasi"
+                                )
+
+                                // Menampilkan toast sebagai umpan balik
                                 Toast.makeText(context, "Sertifikasi berhasil dikirim", Toast.LENGTH_SHORT).show()
+
+                                // Navigasi ke halaman list-sertifikasi-my-post
                                 navController.navigate("list-sertifikasi-my-post")
                             },
                             onError = {errorMessage ->

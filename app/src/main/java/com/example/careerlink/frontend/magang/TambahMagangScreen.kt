@@ -35,6 +35,7 @@ import com.example.careerlink.R
 import com.example.careerlink.frontend.component.LocationSearchBar
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.services.LocationResult
+import com.example.careerlink.services.NotificationService
 import com.example.careerlink.viewmodels.MagangViewModel
 
 
@@ -331,7 +332,17 @@ fun TambahMagangScreen(
                                 kontak = kontak,
                                 imageUri = imageUri,
                                 onSuccess = {
+                                    // Mengirim notifikasi
+                                    NotificationService.sendNotification(
+                                        context,
+                                        "Magang Baru",
+                                        "Magang baru berhasil ditambahkan: $judulMagang"
+                                    )
+
+                                    // Menampilkan toast sebagai umpan balik
                                     Toast.makeText(context, "Magang berhasil dikirim", Toast.LENGTH_SHORT).show()
+
+                                    // Navigasi ke halaman list-magang-my-post
                                     navController.navigate("list-magang-my-post")
                                 },
                                 onError = { errorMessage ->

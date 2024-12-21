@@ -69,7 +69,7 @@ fun ListMyPostSertifikasiScreen(
             )
         } else if (myPostSertifikasi.isEmpty()) {
             Text(
-                text = "Tidak ada data magang tersedia.",
+                text = "Tidak ada data sertifikasi tersedia.",
                 modifier = Modifier
                     .padding(paddingValues)
                     .padding(16.dp)

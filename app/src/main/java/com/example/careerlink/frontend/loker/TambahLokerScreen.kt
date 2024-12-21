@@ -52,6 +52,7 @@ import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.LocationSearchBar
 import com.example.careerlink.frontend.component.TopBar
 import com.example.careerlink.services.LocationResult
+import com.example.careerlink.services.NotificationService
 import com.example.careerlink.viewmodels.LokerViewModel
 
 @Composable
@@ -321,7 +322,17 @@ fun TambahLokerScreen(
                                 kontak = kontak,
                                 imageUri = imageUri,
                                 onSuccess = {
+                                    // Mengirim notifikasi
+                                    NotificationService.sendNotification(
+                                        context,
+                                        "Lowongan Baru",
+                                        "Lowongan baru berhasil ditambahkan: $judulLoker"
+                                    )
+
+                                    // Menampilkan toast sebagai umpan balik
                                     Toast.makeText(context, "Loker berhasil dikirim", Toast.LENGTH_SHORT).show()
+
+                                    // Navigasi ke halaman list-loker-my-post
                                     navController.navigate("list-loker-my-post")
                                 },
                                 onError = { errorMessage ->

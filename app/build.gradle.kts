@@ -3,6 +3,7 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     id ("com.google.dagger.hilt.android")
     id ("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -89,6 +90,9 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0") // Untuk Debug
 
     implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation ("androidx.core:core:1.10.1")
 }
 
 kapt {

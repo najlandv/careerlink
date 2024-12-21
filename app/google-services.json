@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "996249404228",
+    "project_id": "ptbcoba",
+    "storage_bucket": "ptbcoba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996249404228:android:99c99bcdc17bd3c32f8d11",
+        "android_client_info": {
+          "package_name": "com.example.careerlink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIZyB2c4VwNSw4bhYq62H9WdFw4XNGYWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
