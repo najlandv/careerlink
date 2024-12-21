@@ -44,7 +44,7 @@ fun DetailLokerScreen(
 
     Scaffold(
         topBar = {
-            TopBar("Datail Lowongan Kerja", onBackClick = { navController.popBackStack() })
+            TopBar("Detail Lowongan Kerja", onBackClick = { navController.popBackStack() })
         },
         bottomBar = {
             BottomBar(navController = navController)
