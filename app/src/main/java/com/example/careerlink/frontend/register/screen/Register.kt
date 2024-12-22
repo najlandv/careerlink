@@ -56,8 +56,7 @@ fun RegisterScreen(modifier: Modifier = Modifier, viewModel: AuthViewModel = hil
                 Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
             }
             else -> {
-                val errorMessage = "Terjadi kesalahan"
-                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+
             }
         }
     }

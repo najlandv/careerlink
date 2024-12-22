@@ -27,6 +27,9 @@ class AuthViewModel @Inject constructor(
     fun login(email: String, password: String) = viewModelScope.launch {
         try {
             _authState.value = AuthState.Loading
+
+            tokenDataStore.clearToken()
+            
             val loginResponse = authApiService.login(
                 LoginRequest(email, password)
             )
