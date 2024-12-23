@@ -343,7 +343,11 @@ fun TambahMagangScreen(
                                     Toast.makeText(context, "Magang berhasil dikirim", Toast.LENGTH_SHORT).show()
 
                                     // Navigasi ke halaman list-magang-my-post
-                                    navController.navigate("list-magang-my-post")
+                                    navController.navigate("list-magang-my-post") {
+                                        popUpTo("list-magang-my-post") {
+                                            inclusive = true
+                                        }
+                                    }
                                 },
                                 onError = { errorMessage ->
                                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()

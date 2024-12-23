@@ -357,7 +357,11 @@ fun EditMagangScreen(
                                     imageUri = imageUri,
                                     onSuccess = {
                                         Toast.makeText(context, "Magang berhasil dikirim", Toast.LENGTH_SHORT).show()
-                                        navController.navigate("list-magang-my-post")
+                                        navController.navigate("list-magang-my-post") {
+                                            popUpTo("list-magang-my-post") {
+                                                inclusive = true
+                                            }
+                                        }
                                     },
                                     onError = { errorMessage ->
                                         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
