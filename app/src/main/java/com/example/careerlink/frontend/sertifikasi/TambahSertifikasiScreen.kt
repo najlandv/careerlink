@@ -246,7 +246,11 @@ fun TambahSertifikasiScreen(
                                 Toast.makeText(context, "Sertifikasi berhasil dikirim", Toast.LENGTH_SHORT).show()
 
                                 // Navigasi ke halaman list-sertifikasi-my-post
-                                navController.navigate("list-sertifikasi-my-post")
+                                navController.navigate("list-sertifikasi-my-post") {
+                                    popUpTo("list-sertifikasi-my-post") {
+                                        inclusive = true
+                                    }
+                                }
                             },
                             onError = {errorMessage ->
                                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()

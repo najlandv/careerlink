@@ -333,7 +333,11 @@ fun TambahLokerScreen(
                                     Toast.makeText(context, "Loker berhasil dikirim", Toast.LENGTH_SHORT).show()
 
                                     // Navigasi ke halaman list-loker-my-post
-                                    navController.navigate("list-loker-my-post")
+                                    navController.navigate("list-loker-my-post") {
+                                        popUpTo("list-loker-my-post") {
+                                            inclusive = true
+                                        }
+                                    }
                                 },
                                 onError = { errorMessage ->
                                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()

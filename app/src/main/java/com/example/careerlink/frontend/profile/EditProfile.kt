@@ -128,7 +128,11 @@ fun EditProfileScreen(
                             email = email,
                             onSucces = {
                                 Toast.makeText(context, "Profile berhasil dikirim", Toast.LENGTH_SHORT).show()
-                                navController.navigate("profile")
+                                navController.navigate("profile") {
+                                    popUpTo("profile") {
+                                        inclusive = true
+                                    }
+                                }
                             },
                             onError = { errorMessage ->
                                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()

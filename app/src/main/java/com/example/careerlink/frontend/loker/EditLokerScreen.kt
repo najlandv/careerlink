@@ -347,7 +347,11 @@ fun EditLokerScreen(
                                     imageUri = imageUri,
                                     onSuccess = {
                                         Toast.makeText(context, "Loker berhasil dikirim", Toast.LENGTH_SHORT).show()
-                                        navController.navigate("list-loker-my-post")
+                                        navController.navigate("list-loker-my-post") {
+                                            popUpTo("list-loker-my-post") {
+                                                inclusive = true
+                                            }
+                                        }
                                     },
                                     onError = { errorMessage ->
                                         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
