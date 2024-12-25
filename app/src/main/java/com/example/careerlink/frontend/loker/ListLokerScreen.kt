@@ -16,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.careerlink.BuildConfig
 import com.example.careerlink.frontend.component.BottomBar
 import com.example.careerlink.frontend.component.CardList
 import com.example.careerlink.frontend.component.TopBar
@@ -27,9 +29,9 @@ fun ListLokerScreen(
     viewModel: LokerViewModel = hiltViewModel(),
     navController: NavController
 ) {
-
     val lokerList by viewModel.lokerList.collectAsState()
     val errorMessage by viewModel.errorMessage.collectAsState()
+    val baseUrl = BuildConfig.BASE_URL
 
     Scaffold(
         topBar = {
@@ -45,7 +47,9 @@ fun ListLokerScreen(
         if (!errorMessage.isNullOrEmpty()) {
             Text(
                 text = errorMessage!!,
-                modifier = Modifier.padding(paddingValues).padding(16.dp)
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(16.dp)
             )
         } else if (lokerList.isEmpty()) {
             Text(
@@ -61,11 +65,18 @@ fun ListLokerScreen(
                     .padding(horizontal = 16.dp)
             ) {
                 items(lokerList) { loker ->
+                    val imageUrl = if (!loker.gambar_loker.isNullOrEmpty()) {
+                        baseUrl + loker.gambar_loker
+                    } else {
+                        ""
+                    }
+
                     CardList(
                         title = loker.judul_loker,
                         subtitle = "${loker.perusahaan} - ${loker.alamat}",
                         desk = loker.deskripsi_loker,
                         date = loker.tanggal_posting,
+                        gambar = imageUrl,
                         onClick = { navController.navigate("detail-loker/${loker.id_loker}") }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -75,9 +86,9 @@ fun ListLokerScreen(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun ListLokerPrev() {
-//    ListLokerScreen()
+    val navController = rememberNavController()
+    ListLokerScreen(navController = navController)
 }

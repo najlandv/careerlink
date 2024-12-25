@@ -78,13 +78,13 @@ fun HomeScreen(
                     ) {
                         FeatureCard(
                             "Loker",
-                            R.drawable.baseline_account_circle_24,
+                            R.drawable.ic_loker,
                             onClick = {navController.navigate("list-loker")}
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         FeatureCard(
                             "Magang",
-                            R.drawable.baseline_post_add_24,
+                            R.drawable.ic_magang,
                             onClick = {navController.navigate("list-magang")}
                         )
 
