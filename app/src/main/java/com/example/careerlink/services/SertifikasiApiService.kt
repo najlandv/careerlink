@@ -51,6 +51,7 @@ interface SertifikasiApiService {
         @Path("id") id: Int
     ) : Response<DetailSertifikasiResponse>
 
+    @Multipart
     @PATCH("api/sertifikasiupload/{id}")
     suspend fun updateSertifikasi(
         @Header("Authorization") token: String,
